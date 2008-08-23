@@ -1,4 +1,5 @@
 <h1>Blog posts</h1>
+<?php echo $html->link('Add Post','/posts/add')?>
 <table>
 	<tr>
 		<th>Id</th>
