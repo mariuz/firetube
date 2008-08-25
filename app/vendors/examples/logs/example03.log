@@ -1,0 +1,55 @@
+-------------------------------
+FFMPEG OUTPUT
+-------------------------------
+-------------------------------
+COMMAND
+-------------------------------
+/usr/local/bin/ffmpeg -r '2' -i '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212732082-4848d2b20fef6/tmp_%d.jpg' -s '160x120' -loop_output '0'  -y /Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212732082-4848d2b221dfa.gif &> /Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212732082-4848d2b221ea7.info
+-------------------------------
+OUTPUT
+-------------------------------
+/Users/ollie/Sites/@Projects/ffmpeg/www/examples/processed/videos/my-picture-movie.gif
+eg: unsupported coding type (c2)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+Input #0, image2, from '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212732082-4848d2b20fef6/tmp_%d.jpg':
+  Duration: 00:00:07.0, start: 0.000000, bitrate: N/A
+  Stream #0.0,  2.00 fps(r): Video: mjpeg
+Output #0, gif, to '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212732082-4848d2b221dfa.gif':
+  Stream #0.0,  2.00 fps(c): Video: rawvideo, 160x120, q=2-31, 200 kb/s
+Stream mapping:
+  Stream #0.0 -> #0.0
+Press [q] to stop encoding
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+[mjpeg @ 0x54340c]mjpeg: unsupported coding type (c2)
+picture size invalid (0x0)
+frame=    0 q=0.0 Lsize=       1kB time=10000000000.0 bitrate=   0.0kbits/s    
+video:0kB audio:0kB global headers:0kB muxing overhead inf%
+-------------------------------
+RESULT
+-------------------------------
+Process Completed. The process successfully completed. Output was generated to "/Users/ollie/Sites/@Projects/ffmpeg/www/examples/processed/videos/my-picture-movie.gif".

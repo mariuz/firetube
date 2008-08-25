@@ -1,0 +1,25 @@
+-------------------------------
+FFMPEG OUTPUT
+-------------------------------
+-------------------------------
+COMMAND
+-------------------------------
+/usr/local/bin/ffmpeg -i '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/to-be-processed/cat.mpeg' -s '384x284'  -y /Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212736670-4848e49e9b28e.3gp &> /Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212736670-4848e49e9b2eb.info
+ Apr 15 2006 04:58:19, gcc: 4.0.1 (Apple Computer, Inc. build 5250)
+Input #0, mpeg, from '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/to-be-processed/cat.mpeg':
+  Duration: 00:00:04.4, start: 0.367689, bitrate: 1519 kb/s
+  Stream #0.0[0x1e0], 25.00 fps(r): Video: mpeg1video, yuv420p, 384x284, 950 kb/s
+  Stream #0.1[0x1c0]: Audio: mp2, 44100 Hz, mono, 96 kb/s
+Output #0, 3gp, to '/Users/ollie/Sites/@Projects/ffmpeg/www/examples/tmp/1212736670-4848e49e9b28e.3gp':
+  Stream #0.0, 25.00 fps(c): Video: h263, yuv420p, 384x284, q=2-31, 200 kb/s
+  Stream #0.1: Audio: amr_nb, 44100 Hz, mono, 64 kb/s
+Stream mapping:
+  Stream #0.0 -> #0.0
+  Stream #0.1 -> #0.1
+[h263 @ 0x54340c]The specified picture size of 384x284 is not valid for the H.263 codec.
+Valid sizes are 128x96, 176x144, 352x288, 704x576, and 1408x1152. Try H.263+.
+Error while opening codec for output stream #0.0 - maybe incorrect parameters such as bit_rate, rate, width or height
+-------------------------------
+RESULT
+-------------------------------
+Execute error. Output for file "/Users/ollie/Sites/@Projects/ffmpeg/www/examples/to-be-processed/cat.mpeg" was found, but the file contained no data. Please check the available codecs compiled with FFmpeg can support this type of conversion. You can check the encode decode availability by inspecting the output array from PHPVideoToolkit::getFFmpegInfo().
