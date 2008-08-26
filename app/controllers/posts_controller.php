@@ -19,5 +19,9 @@ class PostsController extends AppController {
 			}
 		}
 	}
+	function delete($id) {
+        $this->Post->del($id);
+        $this->flash('The post with id: '.$id.' has been deleted.', '/posts');
+	}
 }
 ?>
