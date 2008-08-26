@@ -4,6 +4,7 @@
 	<tr>
 		<th>Id</th>
 		<th>Title</th>
+		<th>Actions</th>
 		<th>Created</th>
 	</tr>
 
