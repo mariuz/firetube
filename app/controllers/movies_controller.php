@@ -1,5 +1,6 @@
 <?php
 class MoviesController extends AppController {
+
 	function index() {
 		$this->set('movies', $this->Movie->find('all'));
 	}
