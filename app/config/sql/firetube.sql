@@ -21,10 +21,10 @@ CREATE TABLE MOVIES
 CREATE TABLE POSTS
 (
   ID Integer NOT NULL,
-  TITLE Varchar(50),
-  BODY Varchar(2000),
-  CREATED Timestamp,
-  MODIFIED Timestamp,
+  TITLE Varchar(50) NOT NULL,
+  BODY Varchar(2000) NOT NULL,
+  CREATED Timestamp NOT NULL,
+  MODIFIED Timestamp NOT NULL,
   PRIMARY KEY (ID)
 );
 /********************* VIEWS **********************/
