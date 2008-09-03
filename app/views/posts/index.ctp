@@ -1,28 +1,13 @@
-<h1>Blog posts</h1>
-<?php echo $html->link('Add Post','/posts/add')?>
-<table>
-	<tr>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Actions</th>
-		<th>Created</th>
-	</tr>
+<?php 
 
-	<!-- Here is where we loop through our $posts array, printing out post info -->
+$myhtml = file_get_html('/opt/nginx/html/firetube/app/views/posts/html/index.html');
+$myhtml->find('div[id=add_posts]', 0)->innertext = $html->link('Add Post','/posts/add');
 
-	<?php foreach ($posts as $post): ?>
-	<tr>
-		<td><?php echo $post['Post']['id']; ?></td>
-		<td>
-			<?php echo $html->link($post['Post']['title'], 
-"/posts/view/".$post['Post']['id']); ?>
-		</td>
-		<td>
-                <?php echo $html->link('Delete', "/posts/delete/{$post['Post']['id']}", null, 'Are you sure?' )?>
-                </td>
-		<td><?php echo $post['Post']['created']; ?></td>
-	</tr>
-	<?php endforeach; ?>
+foreach ($posts as $post){
+echo "<foo id=fooz>";
+}
+echo $myhtml; 
 
-</table>
 
+
+?>
