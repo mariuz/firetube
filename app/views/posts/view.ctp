@@ -1,5 +1,9 @@
-<h1><?php echo $post['Post']['title']?></h1>
+<?php
 
-<p><small>Created: <?php echo $post['Post']['created']?></small></p>
+$myhtml = file_get_html('/opt/nginx/html/firetube/app/views/posts/html/view.html');
+$myhtml->find('h1[id=post_title]', 0)->innertext = $post['Post']['title'];
+$myhtml->find('p[id=date_created]', 0)->innertext = $post['Post']['created'];
+$myhtml->find('h1[id=post_body]', 0)->innertext = $post['Post']['body'];
 
-<p><?php echo $post['Post']['body']?></p>
+echo  $myhtml;
+?>
