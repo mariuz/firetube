@@ -1218,11 +1218,10 @@
 			if($audio_format == self::FORMAT_MP3)
 			{
 				$info = $this->getFFmpegInfo();
-				if(isset($info['formats']['libmp3lame']))
-				{
-// 					$audio_format = 'liblamemp3';
+//				if(isset($info['formats']['libmp3lame']))
+//				{
 					$audio_format = 'libmp3lame';
-				}
+//				}
 			}
 			return $this->addCommand('-acodec', $audio_format);
 		}

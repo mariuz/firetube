@@ -8,9 +8,9 @@
 // 	ini_set('display_startup_errors', '1');
 
 // 	define the paths to the required binaries
-	define('PHPVIDEOTOOLKIT_FFMPEG_BINARY', '/usr/local/bin/ffmpeg');
+	define('PHPVIDEOTOOLKIT_FFMPEG_BINARY', '/usr/bin/ffmpeg');
 	define('PHPVIDEOTOOLKIT_FLVTOOLS_BINARY', '/usr/bin/flvtool2');
-	define('PHPVIDEOTOOLKIT_MENCODER_BINARY', '/usr/local/bin/mencoder'); // only required for video joining
+	define('PHPVIDEOTOOLKIT_MENCODER_BINARY', '/usr/bin/mencoder'); // only required for video joining
 	define('PHPVIDEOTOOLKIT_FFMPEG_WATERMARK_VHOOK', '/usr/local/lib/vhook/watermark.dylib'); // only required for video wartermarking
 // 	define('PHPVIDEOTOOLKIT_FFMPEG_BINARY', 'xxxx');
 // 	define('PHPVIDEOTOOLKIT_FLVTOOLS_BINARY', 'xxxx');

@@ -57,7 +57,7 @@
 	$toolkit = new PHPVideoToolkit($tmp_dir);
 	
 // 	set PHPVideoToolkit class to run silently
-	$toolkit->on_error_die = FALSE;
+	$toolkit->on_error_die = TRUE;
 	
 // 	start the timer collection
 	$total_process_time = 0;
