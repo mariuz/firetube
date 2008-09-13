@@ -1,3 +1,4 @@
+connect database "/var/lib/firebird/2.1/data/firetube.fdb";
 /********************* ROLES **********************/
 
 /********************* UDFS ***********************/
@@ -5,7 +6,9 @@
 /****************** GENERATORS ********************/
 
 CREATE GENERATOR GEN_MOVIES_ID;
+commit;
 CREATE GENERATOR GEN_POSTS_ID;
+commit;
 /******************** DOMAINS *********************/
 
 /******************* PROCEDURES ******************/
@@ -18,6 +21,7 @@ CREATE TABLE MOVIES
   FILENAME Varchar(512) NOT NULL,
   PRIMARY KEY (ID)
 );
+commit;
 CREATE TABLE POSTS
 (
   ID Integer NOT NULL,
@@ -27,6 +31,7 @@ CREATE TABLE POSTS
   MODIFIED Timestamp NOT NULL,
   PRIMARY KEY (ID)
 );
+commit;
 /********************* VIEWS **********************/
 
 /******************* EXCEPTIONS *******************/
@@ -46,6 +51,7 @@ NEW.ID = GEN_ID(GEN_MOVIES_ID, 1);
 
 END^
 SET TERM ; ^
+commit;
 SET TERM ^ ;
 CREATE TRIGGER POSTS_BI FOR POSTS ACTIVE
 BEFORE INSERT POSITION 0
@@ -59,16 +65,15 @@ NEW.ID = GEN_ID(GEN_POSTS_ID, 1);
 
 END^
 SET TERM ; ^
+commit;
 
 GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE
  ON MOVIES TO SYSDBA WITH GRANT OPTION;
-
-GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE
- ON POSTS TO SYSDBA WITH GRANT OPTION;
-
 
 
 INSERT INTO "POSTS" ("TITLE","BODY","MODIFIED","CREATED") VALUES ('Foo bazz bar','test blog ','now','now');
 
 INSERT INTO "POSTS" ("TITLE","BODY","MODIFIED","CREATED") VALUES (' bazz bar Foo','test blog2 ','now','now');
+commit;
+
 
