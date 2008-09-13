@@ -1,4 +1,4 @@
-connect database "/var/lib/firebird/2.1/data/firetube.fdb";
+connect "/var/lib/firebird/2.1/data/firetube.fdb";
 /********************* ROLES **********************/
 
 /********************* UDFS ***********************/
