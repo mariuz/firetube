@@ -1,7 +1,9 @@
-<h1>Add Post</h1>
 <?php
-echo $form->create('Post');
-echo $form->input('title');
-echo $form->input('body', array('rows' => '3'));
+
+$myhtml = file_get_html('/opt/nginx/html/firetube/app/views/movies/html/add.html');
+echo  $myhtml;
+
+echo $form->create('Movie');
+echo $form->input('Filename');
 echo $form->end('Save Post');
 ?>

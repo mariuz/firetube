@@ -1,6 +1,5 @@
 <?php
 App::import('Vendor', 'simplehtmldom'.DS.'simple_html_dom');
-
 class PostsController extends AppController {
 	function index() {
 		$this->set('posts', $this->Post->find('all'));

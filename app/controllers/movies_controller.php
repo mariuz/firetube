@@ -1,4 +1,5 @@
 <?php
+App::import('Vendor','simplehtmldom'.DS.'simple_html_dom');
 class MoviesController extends AppController {
 
 	function index() {
@@ -7,7 +8,7 @@ class MoviesController extends AppController {
 
 	function view($id) {
 		$this->Movie->id = $id;
-		$this->set('movie', $this->Post->read());
+		$this->set('movie', $this->Movie->read());
 
 	}
 
