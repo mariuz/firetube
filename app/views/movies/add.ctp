@@ -5,5 +5,5 @@ echo  $myhtml;
 
 echo $form->create('Movie');
 echo $form->input('Filename');
-echo $form->end('Save Post');
+echo $form->end('Save Movie');
 ?>
