@@ -1,28 +1,16 @@
-<h1>Movie lists</h1>
-<?php echo $html->link('Add Post','/posts/add')?>
-<table>
-	<tr>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Actions</th>
-		<th>Created</th>
-	</tr>
+<?php 
 
-	<!-- Here is where we loop through our $posts array, printing out post info -->
+$myhtml = file_get_html(VIEWS.$this->viewPath.'/html/index.html');
+$RowTemplate =  file_get_html(VIEWS.$this->viewPath.'/html/for_each_table.html');
+$myhtml->find('div[id=add_movies]', 0)->innertext = $html->link('Add Movies','/movies/add');
 
-	<?php foreach ($posts as $post): ?>
-	<tr>
-		<td><?php echo $post['Post']['id']; ?></td>
-		<td>
-			<?php echo $html->link($post['Post']['title'], 
-"/posts/view/".$post['Post']['id']); ?>
-		</td>
-		<td>
-                <?php echo $html->link('Delete', "/posts/delete/{$post['Post']['id']}", null, 'Are you sure?' )?>
-                </td>
-		<td><?php echo $post['Post']['created']; ?></td>
-	</tr>
-	<?php endforeach; ?>
-
-</table>
-
+foreach ($movies as $movie){
+ $RowTemplate->find('td[id=movie_id]',0)->innertext = $movie['Movie']['id'];
+// $RowTemplate->find('td[id=post_view]',0)->innertext = $html->link($post['Post']['title'],"/posts/view/".$post['Post']['id']);
+// $RowTemplate->find('td[id=post_delete]',0)->innertext = $html->link('Delete', "/posts/delete/{$post['Post']['id']}", null, 'Are you sure?' );
+// $RowTemplate->find('td[id=post_date]',0)->innertext = $post['Post']['created'];
+// $RowText = $RowTemplate->outertext;
+ $myhtml->find('div[id=foreach]', 0)->innertext = $RowText.$myhtml->find('div[id=foreach]', 0)->innertext;
+}
+echo $myhtml; 
+?>
