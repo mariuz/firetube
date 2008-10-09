@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: routes.php 7296 2008-06-27 09:09:03Z gwoo $ */
+/* SVN FILE: $Id: routes.php 7690 2008-10-02 04:56:53Z nate $ */
 /**
  * Short description for file.
  *
@@ -23,24 +23,19 @@
  * @package			cake
  * @subpackage		cake.app.config
  * @since			CakePHP(tm) v 0.2.9
- * @version			$Revision: 7296 $
- * @modifiedby		$LastChangedBy: gwoo $
- * @lastmodified	$Date: 2008-06-27 02:09:03 -0700 (Fri, 27 Jun 2008) $
+ * @version			$Revision: 7690 $
+ * @modifiedby		$LastChangedBy: nate $
+ * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
  * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
- * to use (in this case, /app/views/pages/home.thtml)...
+ * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-/**
- * Then we connect url '/test' to our test controller. This is helpful in
- * developement.
- */
-	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
 ?>
