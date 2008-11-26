@@ -121,8 +121,9 @@ class MoviesController extends AppController {
 		$filename_hash = md5($filename);
 		
 // 		echo a report to the buffer
-		echo 'Video converted in '.$process_time.' seconds... <b>'.$file.'</b><br /><br />' 
+	//	echo 'Video converted in '.$process_time.' seconds... <b>'.$file.'</b><br /><br />'; 
 
+	}
 	}
 	function delete($id) {
         $this->Movie->del($id);
