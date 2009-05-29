@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: dispatcher.php 7961 2008-12-25 23:21:36Z gwoo $ */
+/* SVN FILE: $Id: dispatcher.php 8166 2009-05-04 21:17:19Z gwoo $ */
 /**
  * Dispatcher takes the URL information, parses it for paramters and
  * tells the involved controllers what to do.
@@ -20,9 +20,9 @@
  * @package       cake
  * @subpackage    cake.cake
  * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision: 7961 $
+ * @version       $Revision: 8166 $
  * @modifiedby    $LastChangedBy: gwoo $
- * @lastmodified  $Date: 2008-12-25 15:21:36 -0800 (Thu, 25 Dec 2008) $
+ * @lastmodified  $Date: 2009-05-04 14:17:19 -0700 (Mon, 04 May 2009) $
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
@@ -87,7 +87,6 @@ class Dispatcher extends Object {
 		if ($base !== false) {
 			Configure::write('App.base', $base);
 		}
-
 		if ($url !== null) {
 			return $this->dispatch($url);
 		}
@@ -105,45 +104,36 @@ class Dispatcher extends Object {
  * @access public
  */
 	function dispatch($url = null, $additionalParams = array()) {
-		$parse = true;
-
-		if (is_array($url)) {
-			$url = $this->__extractParams($url, $additionalParams);
-			$parse = false;
-		}
-
 		if ($this->base === false) {
 			$this->base = $this->baseUrl();
 		}
 
-		if ($url !== null) {
-			$_GET['url'] = $url;
+		if (is_array($url)) {
+			$url = $this->__extractParams($url, $additionalParams);
+		} else {
+			if ($url) {
+				$_GET['url'] = $url;
+			}
+			$url = $this->getUrl();
+			$this->params = array_merge($this->parseParams($url), $additionalParams);
 		}
 
-		if ($parse) {
-			$url = $this->getUrl();
-		}
 		$this->here = $this->base . '/' . $url;
 
 		if ($this->cached($url)) {
 			$this->_stop();
 		}
 
-		if ($parse) {
-			$this->params = array_merge($this->parseParams($url), $additionalParams);
-		}
 		$controller =& $this->__getController();
 
 		if (!is_object($controller)) {
 			Router::setRequestInfo(array($this->params, array('base' => $this->base, 'webroot' => $this->webroot)));
-			return $this->cakeError('missingController', array(
-				array(
-					'className' => Inflector::camelize($this->params['controller']) . 'Controller',
-					'webroot' => $this->webroot,
-					'url' => $url,
-					'base' => $this->base
-				)
-			));
+			return $this->cakeError('missingController', array(array(
+				'className' => Inflector::camelize($this->params['controller']) . 'Controller',
+				'webroot' => $this->webroot,
+				'url' => $url,
+				'base' => $this->base
+			)));
 		}
 
 		$privateAction = (bool)(strpos($this->params['action'], '_', 0) === 0);
@@ -163,15 +153,13 @@ class Dispatcher extends Object {
 		));
 
 		if ($privateAction) {
-			return $this->cakeError('privateAction', array(
-				array(
-					'className' => Inflector::camelize($this->params['controller'] . "Controller"),
-					'action' => $this->params['action'],
-					'webroot' => $this->webroot,
-					'url' => $url,
-					'base' => $this->base
-				)
-			));
+			return $this->cakeError('privateAction', array(array(
+				'className' => Inflector::camelize($this->params['controller'] . "Controller"),
+				'action' => $this->params['action'],
+				'webroot' => $this->webroot,
+				'url' => $url,
+				'base' => $this->base
+			)));
 		}
 
 		$controller->base = $this->base;
@@ -187,15 +175,12 @@ class Dispatcher extends Object {
 		} else {
 			$controller->data = null;
 		}
-
 		if (array_key_exists('return', $this->params) && $this->params['return'] == 1) {
 			$controller->autoRender = false;
 		}
-
 		if (!empty($this->params['bare'])) {
 			$controller->autoLayout = false;
 		}
-
 		if (array_key_exists('layout', $this->params)) {
 			if (empty($this->params['layout'])) {
 				$controller->autoLayout = false;
@@ -203,11 +188,9 @@ class Dispatcher extends Object {
 				$controller->layout = $this->params['layout'];
 			}
 		}
-
 		if (isset($this->params['viewPath'])) {
 			$controller->viewPath = $this->params['viewPath'];
 		}
-
 		return $this->_invoke($controller, $this->params);
 	}
 /**
@@ -233,14 +216,13 @@ class Dispatcher extends Object {
 				App::import('Core', 'Scaffold');
 				return new Scaffold($controller, $params);
 			}
-			return $this->cakeError('missingAction', array(
-				array(
-					'className' => Inflector::camelize($params['controller']."Controller"),
-					'action' => $params['action'],
-					'webroot' => $this->webroot,
-					'url' => $this->here,
-					'base' => $this->base)));
-
+			return $this->cakeError('missingAction', array(array(
+				'className' => Inflector::camelize($params['controller']."Controller"),
+				'action' => $params['action'],
+				'webroot' => $this->webroot,
+				'url' => $this->here,
+				'base' => $this->base
+			)));
 		}
 		$output = $controller->dispatchMethod($params['action'], $params['pass']);
 
@@ -262,16 +244,13 @@ class Dispatcher extends Object {
  *
  * @param array $url
  * @param array $additionalParams
- * @return null
+ * @return string $url
  * @access private
- * @todo commented Router::url(). this improved performance,
- *		 will work on this more later.
  */
 	function __extractParams($url, $additionalParams = array()) {
 		$defaults = array('pass' => array(), 'named' => array(), 'form' => array());
 		$this->params = array_merge($defaults, $url, $additionalParams);
-		//$url = Router::url($url);
-		//return $url;
+		return Router::url($url);
 	}
 /**
  * Returns array of GET and POST parameters. GET parameters are taken from given URL.
@@ -300,19 +279,18 @@ class Dispatcher extends Object {
 				unset($params['form']['_method']);
 			}
 		}
-		extract(Router::getNamedExpressions());
+		$namedExpressions = Router::getNamedExpressions();
+		extract($namedExpressions);
 		include CONFIGS . 'routes.php';
 		$params = array_merge(Router::parse($fromUrl), $params);
 
-		if (empty($params['action'])) {
+		if (strlen($params['action']) === 0) {
 			$params['action'] = 'index';
 		}
-
 		if (isset($params['form']['data'])) {
 			$params['data'] = Router::stripEscape($params['form']['data']);
 			unset($params['form']['data']);
 		}
-
 		if (isset($_GET)) {
 			if (ini_get('magic_quotes_gpc') === '1') {
 				$url = stripslashes_deep($_GET);
@@ -325,13 +303,11 @@ class Dispatcher extends Object {
 				$params['url'] = $url;
 			}
 		}
-
 		foreach ($_FILES as $name => $data) {
 			if ($name != 'data') {
 				$params['form'][$name] = $data;
 			}
 		}
-
 		if (isset($_FILES['data'])) {
 			foreach ($_FILES['data'] as $key => $data) {
 				foreach ($data as $model => $fields) {
@@ -363,14 +339,13 @@ class Dispatcher extends Object {
 		if (!$base) {
 			$base = $this->base;
 		}
-
 		if ($base !== false) {
 			$this->webroot = $base . '/';
 			return $this->base = $base;
 		}
-
 		if (!$baseUrl) {
-			$base = dirname(env('PHP_SELF'));
+			$replace = array('<', '>', '*', '\'', '"');
+			$base = str_replace($replace, '', dirname(env('PHP_SELF')));
 
 			if ($webroot === 'webroot' && $webroot === basename($base)) {
 				$base = dirname($base);
@@ -418,10 +393,12 @@ class Dispatcher extends Object {
 	function _restructureParams($params, $reverse = false) {
 		if ($reverse === true) {
 			extract(Router::getArgs($params['action']));
-			$params = array_merge($params, array('controller'=> $params['plugin'],
-						'action'=> $params['controller'],
-						'pass' => array_merge($pass, $params['pass']),
-						'named' => array_merge($named, $params['named'])));
+			$params = array_merge($params, array(
+				'controller'=> $params['plugin'],
+				'action'=> $params['controller'],
+				'pass' => array_merge($pass, $params['pass']),
+				'named' => array_merge($named, $params['named'])
+			));
 			$this->plugin = $params['plugin'];
 		} else {
 			$params['plugin'] = $params['controller'];
@@ -444,24 +421,29 @@ class Dispatcher extends Object {
  */
 	function &__getController($params = null) {
 		if (!is_array($params)) {
-			$params = $this->params;
+			$original = $params = $this->params;
 		}
 		$controller = false;
-
-		if (!$ctrlClass = $this->__loadController($params)) {
+		$ctrlClass = $this->__loadController($params);
+		if (!$ctrlClass) {
 			if (!isset($params['plugin'])) {
 				$params = $this->_restructureParams($params);
 			} else {
+				if (empty($original['pass']) && $original['action'] == 'index') {
+					$params['action'] = null;
+				}
 				$params = $this->_restructureParams($params, true);
 			}
-
-			if (!$ctrlClass = $this->__loadController($params)) {
+			$ctrlClass = $this->__loadController($params);
+			if (!$ctrlClass) {
+				$this->params = $original;
 				return $controller;
 			}
+		} else {
+			$params = $this->params;
 		}
 		$name = $ctrlClass;
 		$ctrlClass = $ctrlClass . 'Controller';
-
 		if (class_exists($ctrlClass)) {
 			if (strtolower(get_parent_class($ctrlClass)) === strtolower($name . 'AppController') && empty($params['plugin'])) {
 				$params = $this->_restructureParams($params);
@@ -481,7 +463,6 @@ class Dispatcher extends Object {
  */
 	function __loadController($params) {
 		$pluginName = $pluginPath = $controller = null;
-
 		if (!empty($params['plugin'])) {
 			$this->plugin = $params['plugin'];
 			$pluginName = Inflector::camelize($params['plugin']);
@@ -489,11 +470,10 @@ class Dispatcher extends Object {
 			$this->params['controller'] = $this->plugin;
 			$controller = $pluginName;
 		}
-
 		if (!empty($params['controller'])) {
+			$this->params['controller'] = $params['controller'];
 			$controller = Inflector::camelize($params['controller']);
 		}
-
 		if ($pluginPath . $controller) {
 			if (App::import('Controller', $pluginPath . $controller)) {
 				return $controller;
@@ -522,11 +502,9 @@ class Dispatcher extends Object {
 		if ($base) {
 			$uri = preg_replace('/^(?:\/)?(?:' . preg_quote($base, '/') . ')?(?:url=)?/', '', $uri);
 		}
-
 		if (PHP_SAPI == 'isapi') {
 			$uri = preg_replace('/^(?:\/)?(?:\/)?(?:\?)?(?:url=)?/', '', $uri);
 		}
-
 		if (!empty($uri)) {
 			if (key($_GET) && strpos(key($_GET), '?') !== false) {
 				unset($_GET[key($_GET)]);
@@ -540,11 +518,9 @@ class Dispatcher extends Object {
 		} elseif (empty($uri) && is_string(env('QUERY_STRING'))) {
 			$uri = env('QUERY_STRING');
 		}
-
 		if (strpos($uri, 'index.php') !== false) {
 			list(, $uri) = explode('index.php', $uri, 2);
 		}
-
 		if (empty($uri) || $uri == '/' || $uri == '//') {
 			return '';
 		}
@@ -563,7 +539,6 @@ class Dispatcher extends Object {
 			if ($uri == null) {
 				$uri = $this->uri();
 			}
-
 			if ($base == null) {
 				$base = $this->base;
 			}
@@ -596,7 +571,6 @@ class Dispatcher extends Object {
 		} else {
 			$url = $_GET['url'];
 		}
-
 		if ($url{0} == '/') {
 			$url = substr($url, 1);
 		}

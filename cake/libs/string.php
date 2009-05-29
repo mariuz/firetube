@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: string.php 7945 2008-12-19 02:16:01Z gwoo $ */
+/* SVN FILE: $Id: string.php 8166 2009-05-04 21:17:19Z gwoo $ */
 /**
  * String handling methods.
  *
@@ -18,9 +18,9 @@
  * @package       cake
  * @subpackage    cake.cake.libs
  * @since         CakePHP(tm) v 1.2.0.5551
- * @version       $Revision: 7945 $
+ * @version       $Revision: 8166 $
  * @modifiedby    $LastChangedBy: gwoo $
- * @lastmodified  $Date: 2008-12-18 18:16:01 -0800 (Thu, 18 Dec 2008) $
+ * @lastmodified  $Date: 2009-05-04 14:17:19 -0700 (Mon, 04 May 2009) $
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
@@ -211,10 +211,10 @@ class String extends Object {
  * @static
  */
 	function insert($str, $data, $options = array()) {
-		$options = array_merge(
-			array('before' => ':', 'after' => null, 'escape' => '\\', 'format' => null, 'clean' => false),
-			$options
+		$defaults = array(
+			'before' => ':', 'after' => null, 'escape' => '\\', 'format' => null, 'clean' => false
 		);
+		$options += $defaults;
 		$format = $options['format'];
 
 		if (!isset($format)) {
@@ -231,12 +231,14 @@ class String extends Object {
 
 		if (array_keys($data) === array_keys(array_values($data))) {
 			$offset = 0;
-			while ($pos = strpos($str, '?', $offset)) {
+			while (($pos = strpos($str, '?', $offset)) !== false) {
 				$val = array_shift($data);
 				$offset = $pos + strlen($val);
 				$str = substr_replace($str, $val, $pos, 1);
 			}
 		} else {
+			asort($data);
+
 			$hashKeys = array_map('md5', array_keys($data));
 			$tempData = array_combine(array_keys($data), array_values($hashKeys));
 			foreach ($tempData as $key => $hashVal) {
