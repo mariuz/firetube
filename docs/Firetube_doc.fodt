@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+                 xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+                 xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+                 xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+                 xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+                 xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0"
+                 xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0"
+                 xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+                 xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0"
+                 xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0"
+                 xmlns:math="http://www.w3.org/1998/Math/MathML"
+                 xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0"
+                 xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0"
+                 xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0"
+                 xmlns:ooo="http://openoffice.org/2004/office"
+                 xmlns:ooow="http://openoffice.org/2004/writer"
+                 xmlns:oooc="http://openoffice.org/2004/calc"
+                 xmlns:dom="http://www.w3.org/2001/xml-events"
+                 xmlns:xforms="http://www.w3.org/2002/xforms"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rpt="http://openoffice.org/2005/report"
+                 xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2"
+                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                 xmlns:grddl="http://www.w3.org/2003/g/data-view#"
+                 xmlns:officeooo="http://openoffice.org/2009/office"
+                 xmlns:tableooo="http://openoffice.org/2009/table"
+                 xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0"
+                 xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0"
+                 xmlns:css3t="http://www.w3.org/TR/css3-text/"
+                 office:version="1.2"
+                 grddl:transformation="http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl"
+                 office:mimetype="application/vnd.oasis.opendocument.text">
+   <office:meta>
+      <meta:generator>OpenOffice.org/3.2$Linux OpenOffice.org_project/320m19$Build-9505</meta:generator>
+      <meta:initial-creator>Unknown</meta:initial-creator>
+      <meta:editing-cycles>21</meta:editing-cycles>
+      <meta:creation-date>2008-09-22T16:38:10</meta:creation-date>
+      <dc:date>2010-09-15T18:34:51</dc:date>
+  
+      <meta:editing-duration>PT00H36M41S</meta:editing-duration>
+      
+      <meta:document-statistic meta:table-count="0" meta:image-count="0" meta:object-count="0"
+                               meta:page-count="5"
+                               meta:paragraph-count="57"
+                               meta:word-count="1333"
+                               meta:character-count="9829"/>
+      <dc:creator>popa adrian</dc:creator>
+   </office:meta>
+   <office:settings>
+      <config:config-item-set config:name="ooo:view-settings">
+         <config:config-item config:name="ViewAreaTop" config:type="int">122343</config:config-item>
+         <config:config-item config:name="ViewAreaLeft" config:type="int">0</config:config-item>
+         <config:config-item config:name="ViewAreaWidth" config:type="int">32387</config:config-item>
+         <config:config-item config:name="ViewAreaHeight" config:type="int">21354</config:config-item>
+         <config:config-item config:name="ShowRedlineChanges" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="InBrowseMode" config:type="boolean">false</config:config-item>
+         <config:config-item-map-indexed config:name="Views">
+            <config:config-item-map-entry>
+               <config:config-item config:name="ViewId" config:type="string">view2</config:config-item>
+               <config:config-item config:name="ViewLeft" config:type="int">12845</config:config-item>
+               <config:config-item config:name="ViewTop" config:type="int">124016</config:config-item>
+               <config:config-item config:name="VisibleLeft" config:type="int">0</config:config-item>
+               <config:config-item config:name="VisibleTop" config:type="int">122343</config:config-item>
+               <config:config-item config:name="VisibleRight" config:type="int">32385</config:config-item>
+               <config:config-item config:name="VisibleBottom" config:type="int">143695</config:config-item>
+               <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
+               <config:config-item config:name="ViewLayoutColumns" config:type="short">0</config:config-item>
+               <config:config-item config:name="ViewLayoutBookMode" config:type="boolean">false</config:config-item>
+               <config:config-item config:name="ZoomFactor" config:type="short">100</config:config-item>
+               <config:config-item config:name="IsSelectedFrame" config:type="boolean">false</config:config-item>
+            </config:config-item-map-entry>
+         </config:config-item-map-indexed>
+      </config:config-item-set>
+      <config:config-item-set config:name="ooo:configuration-settings">
+         <config:config-item config:name="AddParaSpacingToTableCells" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintPaperFromSetup" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="Rsid" config:type="int">914753</config:config-item>
+         <config:config-item config:name="IsKernAsianPunctuation" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintReversed" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="LinkUpdateMode" config:type="short">1</config:config-item>
+         <config:config-item config:name="DoNotCaptureDrawObjsOnPage" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="SaveVersionOnClose" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintEmptyPages" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintSingleJobs" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="AllowPrintJobCancel" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="RsidRoot" config:type="int">798410</config:config-item>
+         <config:config-item config:name="AddFrameOffsets" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintLeftPages" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintTables" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="ProtectForm" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="ChartAutoUpdate" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintControls" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrinterSetup" config:type="base64Binary"/>
+         <config:config-item config:name="CurrentDatabaseDataSource" config:type="string"/>
+         <config:config-item config:name="LoadReadonly" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="CurrentDatabaseCommand" config:type="string"/>
+         <config:config-item config:name="ConsiderTextWrapOnObjPos" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="ApplyUserData" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="AddParaTableSpacing" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="FieldAutoUpdate" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="IgnoreFirstLineIndentInNumbering" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="TabsRelativeToIndent" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="IgnoreTabsAndBlanksForLineCalculation" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintAnnotationMode" config:type="short">0</config:config-item>
+         <config:config-item config:name="AddParaTableSpacingAtStart" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="UseOldPrinterMetrics" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="TableRowKeep" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrinterName" config:type="string"/>
+         <config:config-item config:name="PrintFaxName" config:type="string"/>
+         <config:config-item config:name="UnxForceZeroExtLeading" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintTextPlaceholder" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="DoNotJustifyLinesWithManualBreak" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintRightPages" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="CharacterCompressionType" config:type="short">0</config:config-item>
+         <config:config-item config:name="UseFormerTextWrapping" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="IsLabelDocument" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="AlignTabStopPosition" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintHiddenText" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="DoNotResetParaAttrsForNumFont" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintPageBackground" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="CurrentDatabaseCommandType" config:type="int">0</config:config-item>
+         <config:config-item config:name="InvertBorderSpacing" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="OutlineLevelYieldsNumbering" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintProspect" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintGraphics" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="SaveGlobalDocumentLinks" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintProspectRTL" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="UseFormerLineSpacing" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="AddExternalLeading" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="UseFormerObjectPositioning" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="RedlineProtectionKey" config:type="base64Binary"/>
+         <config:config-item config:name="ClipAsCharacterAnchoredWriterFlyFrames" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="UseOldNumbering" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="CollapseEmptyCellPara" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrintDrawings" config:type="boolean">true</config:config-item>
+         <config:config-item config:name="PrinterIndependentLayout" config:type="string">high-resolution</config:config-item>
+         <config:config-item config:name="TabAtLeftIndentForParagraphsInList" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="PrintBlackFonts" config:type="boolean">false</config:config-item>
+         <config:config-item config:name="UpdateFromTemplate" config:type="boolean">true</config:config-item>
+      </config:config-item-set>
+   </office:settings>
+   <office:scripts>
+      <office:script script:language="ooo:Basic">
+         <ooo:libraries/>
+      </office:script>
+   </office:scripts>
+   <office:font-face-decls>
+      <style:font-face style:name="Albany" svg:font-family="Albany"/>
+      <style:font-face style:name="Courier New" svg:font-family="'Courier New'"/>
+      <style:font-face style:name="Times New Roman1" svg:font-family="'Times New Roman'"/>
+      <style:font-face style:name="Verdana" svg:font-family="Verdana"/>
+      <style:font-face style:name="Times New Roman" svg:font-family="'Times New Roman'"
+                       style:font-family-generic="roman"
+                       style:font-pitch="variable"/>
+      <style:font-face style:name="DejaVu Sans" svg:font-family="'DejaVu Sans'"
+                       style:font-family-generic="system"
+                       style:font-pitch="variable"/>
+      <style:font-face style:name="Waree" svg:font-family="Waree" style:font-family-generic="system"
+                       style:font-pitch="variable"/>
+   </office:font-face-decls>
+   <office:styles>
+      <style:default-style style:family="graphic">
+         <style:graphic-properties draw:shadow-offset-x="0.1181in" draw:shadow-offset-y="0.1181in"
+                                   draw:start-line-spacing-horizontal="0.1114in"
+                                   draw:start-line-spacing-vertical="0.1114in"
+                                   draw:end-line-spacing-horizontal="0.1114in"
+                                   draw:end-line-spacing-vertical="0.1114in"
+                                   style:flow-with-text="true"/>
+         <style:paragraph-properties style:text-autospace="ideograph-alpha" style:line-break="strict"
+                                     style:writing-mode="lr-tb"
+                                     style:font-independent-line-spacing="false">
+            <style:tab-stops/>
+         </style:paragraph-properties>
+         <style:text-properties fo:color="#000000" fo:font-size="12pt" fo:language="en" fo:country="US"
+                                style:letter-kerning="true"
+                                style:font-size-asian="12pt"
+                                style:language-asian="en"
+                                style:country-asian="US"
+                                style:font-size-complex="12pt"
+                                style:language-complex="en"
+                                style:country-complex="US"/>
+      </style:default-style>
+      <style:default-style style:family="paragraph">
+         <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha"
+                                     style:punctuation-wrap="hanging"
+                                     style:line-break="strict"
+                                     style:tab-stop-distance="0.4925in"
+                                     style:writing-mode="page"/>
+         <style:text-properties fo:color="#000000" style:font-name="Times New Roman" fo:font-size="12pt"
+                                fo:language="en"
+                                fo:country="US"
+                                style:letter-kerning="true"
+                                style:font-name-asian="DejaVu Sans"
+                                style:font-size-asian="12pt"
+                                style:language-asian="en"
+                                style:country-asian="US"
+                                style:font-name-complex="Waree"
+                                style:font-size-complex="12pt"
+                                style:language-complex="en"
+                                style:country-complex="US"
+                                fo:hyphenate="false"
+                                fo:hyphenation-remain-char-count="2"
+                                fo:hyphenation-push-char-count="2"/>
+      </style:default-style>
+      <style:default-style style:family="table">
+         <style:table-properties table:border-model="separating"/>
+      </style:default-style>
+      <style:default-style style:family="table-row">
+         <style:table-row-properties fo:keep-together="auto"/>
+      </style:default-style>
+      <style:style style:name="Standard" style:family="paragraph" style:class="text">
+         <style:paragraph-properties fo:margin-left="0.0598in" fo:margin-right="0.0598in" fo:margin-top="0.0598in"
+                                     fo:margin-bottom="0.0598in"
+                                     fo:line-height="100%"
+                                     fo:text-align="start"
+                                     style:justify-single-word="false"
+                                     fo:hyphenation-ladder-count="no-limit"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"
+                                     fo:background-color="transparent"
+                                     style:writing-mode="lr-tb">
+            <style:tab-stops/>
+            <style:background-image/>
+         </style:paragraph-properties>
+         <style:text-properties fo:font-variant="normal" fo:text-transform="none" fo:color="#000000"
+                                style:text-line-through-style="none"
+                                style:text-position="0% 100%"
+                                style:font-name="Verdana"
+                                fo:font-size="10pt"
+                                fo:language="en"
+                                fo:country="US"
+                                fo:font-style="normal"
+                                fo:text-shadow="none"
+                                style:text-underline-style="none"
+                                fo:font-weight="normal"
+                                style:text-underline-mode="continuous"
+                                style:text-overline-mode="continuous"
+                                style:text-line-through-mode="continuous"
+                                fo:background-color="transparent"
+                                fo:hyphenate="false"
+                                fo:hyphenation-remain-char-count="0"
+                                fo:hyphenation-push-char-count="0"/>
+      </style:style>
+      <style:style style:name="Heading" style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:next-style-name="Text_20_body"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1665in" fo:margin-bottom="0.1965in" fo:keep-with-next="always"/>
+         <style:text-properties style:font-name="Albany" fo:font-size="14pt"/>
+      </style:style>
+      <style:style style:name="Text_20_body" style:display-name="Text body"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
+                                     fo:margin-bottom="0in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="List" style:family="paragraph" style:parent-style-name="Standard"
+                   style:class="list">
+         <style:paragraph-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
+                                     fo:margin-bottom="0in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="Caption" style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:class="extra">
+         <style:paragraph-properties fo:margin-top="0.0835in" fo:margin-bottom="0.0835in"/>
+         <style:text-properties fo:font-size="12pt" fo:font-style="italic"/>
+      </style:style>
+      <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard"
+                   style:class="index">
+         <style:paragraph-properties text:number-lines="false" text:line-number="0"/>
+         <style:text-properties style:font-size-asian="12pt"/>
+      </style:style>
+      <style:style style:name="Heading_20_1" style:display-name="Heading 1"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:next-style-name="Text_20_body"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1665in" fo:margin-bottom="0.1965in" fo:keep-with-next="always"/>
+         <style:text-properties style:font-name="Times New Roman1" fo:font-size="24pt" fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="Heading_20_2" style:display-name="Heading 2"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:next-style-name="Text_20_body"
+                   style:default-outline-level="2"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1665in" fo:margin-bottom="0.1965in" fo:keep-with-next="always"/>
+         <style:text-properties style:font-name="Albany" fo:font-size="14pt" fo:font-style="italic"
+                                fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="Heading_20_4" style:display-name="Heading 4"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:next-style-name="Text_20_body"
+                   style:default-outline-level="4"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1665in" fo:margin-bottom="0.1965in" fo:keep-with-next="always"/>
+         <style:text-properties style:font-name="Albany" fo:font-size="12pt" fo:font-style="italic"
+                                fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard"
+                   style:class="extra">
+         <style:paragraph-properties>
+            <style:tab-stops>
+               <style:tab-stop style:position="3.3457in" style:type="center"/>
+               <style:tab-stop style:position="6.6925in" style:type="right"/>
+            </style:tab-stops>
+         </style:paragraph-properties>
+      </style:style>
+      <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard"
+                   style:class="extra">
+         <style:paragraph-properties>
+            <style:tab-stops>
+               <style:tab-stop style:position="3.3457in" style:type="center"/>
+               <style:tab-stop style:position="6.6925in" style:type="right"/>
+            </style:tab-stops>
+         </style:paragraph-properties>
+      </style:style>
+      <style:style style:name="Table_20_Contents" style:display-name="Table Contents"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:class="extra">
+         <style:paragraph-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
+                                     fo:margin-bottom="0in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="Sender" style:family="paragraph" style:parent-style-name="Standard"
+                   style:class="extra">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0in"/>
+         <style:text-properties fo:font-style="italic"/>
+      </style:style>
+      <style:style style:name="Quotations" style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:class="html">
+         <style:paragraph-properties fo:margin-left="0.3937in" fo:margin-right="0.3937in" fo:margin-top="0in"
+                                     fo:margin-bottom="0.1965in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="Preformatted_20_Text" style:display-name="Preformatted Text"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:class="html">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0in"/>
+         <style:text-properties style:font-name="Courier New"/>
+      </style:style>
+      <style:style style:name="Horizontal_20_Line" style:display-name="Horizontal Line"
+                   style:family="paragraph"
+                   style:parent-style-name="Standard"
+                   style:next-style-name="Text_20_body"
+                   style:class="html">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"
+                                     style:border-line-width-bottom="0.0008in 0.0138in 0.0008in"
+                                     fo:padding="0in"
+                                     fo:border-left="none"
+                                     fo:border-right="none"
+                                     fo:border-top="none"
+                                     fo:border-bottom="0.0154in double #808080"/>
+         <style:text-properties fo:font-size="6pt"/>
+      </style:style>
+      <style:style style:name="Endnote_20_Symbol" style:display-name="Endnote Symbol"
+                   style:family="text"/>
+      <style:style style:name="Internet_20_link" style:display-name="Internet link"
+                   style:family="text">
+         <style:text-properties fo:color="#000080" fo:language="zxx" fo:country="none"
+                                style:text-underline-style="solid"
+                                style:text-underline-width="auto"
+                                style:text-underline-color="font-color"
+                                style:language-asian="zxx"
+                                style:country-asian="none"
+                                style:language-complex="zxx"
+                                style:country-complex="none"/>
+      </style:style>
+      <style:style style:name="Frame" style:family="graphic">
+         <style:graphic-properties fo:background-color="transparent" style:background-transparency="100%"
+                                   fo:padding="0in"
+                                   fo:border="none">
+            <style:background-image/>
+         </style:graphic-properties>
+      </style:style>
+      <style:style style:name="Graphics" style:family="graphic">
+         <style:graphic-properties fo:background-color="transparent" style:background-transparency="100%"
+                                   fo:padding="0in"
+                                   fo:border="none">
+            <style:background-image/>
+         </style:graphic-properties>
+      </style:style>
+      <style:style style:name="OLE" style:family="graphic">
+         <style:graphic-properties fo:background-color="transparent" style:background-transparency="100%"
+                                   fo:padding="0in"
+                                   fo:border="none">
+            <style:background-image/>
+         </style:graphic-properties>
+      </style:style>
+      <text:outline-style style:name="Outline">
+         <text:outline-level-style text:level="1" style:num-format="">
+            <style:list-level-properties/>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="2" style:num-format="">
+            <style:list-level-properties/>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="3" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="0.5in"
+                                                 fo:text-indent="-0.5in"
+                                                 fo:margin-left="0.5in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="4" style:num-format="">
+            <style:list-level-properties/>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="5" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="0.7in"
+                                                 fo:text-indent="-0.7in"
+                                                 fo:margin-left="0.7in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="6" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="0.8in"
+                                                 fo:text-indent="-0.8in"
+                                                 fo:margin-left="0.8in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="7" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="0.9in"
+                                                 fo:text-indent="-0.9in"
+                                                 fo:margin-left="0.9in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="8" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1in"
+                                                 fo:text-indent="-1in"
+                                                 fo:margin-left="1in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="9" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.1in"
+                                                 fo:text-indent="-1.1in"
+                                                 fo:margin-left="1.1in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+         <text:outline-level-style text:level="10" style:num-format="">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.2in"
+                                                 fo:text-indent="-1.2in"
+                                                 fo:margin-left="1.2in"/>
+            </style:list-level-properties>
+         </text:outline-level-style>
+      </text:outline-style>
+      <text:notes-configuration text:note-class="footnote" style:num-format="1" text:start-value="0"
+                                text:footnotes-position="page"
+                                text:start-numbering-at="document"/>
+      <text:notes-configuration text:note-class="endnote" text:citation-style-name="Endnote_20_Symbol"
+                                text:master-page-name="Endnote"
+                                style:num-format="1"
+                                text:start-value="0"/>
+      <text:linenumbering-configuration text:number-lines="false" text:offset="0.1965in" style:num-format="1"
+                                        text:number-position="left"
+                                        text:increment="5"/>
+   </office:styles>
+   <office:automatic-styles>
+      <style:style style:name="P1" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+      </style:style>
+      <style:style style:name="P2" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+         <style:text-properties fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="P3" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+         <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold"
+                                style:font-weight-complex="bold"/>
+      </style:style>
+      <style:style style:name="P4" style:family="paragraph"
+                   style:parent-style-name="Preformatted_20_Text">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+      </style:style>
+      <style:style style:name="P5" style:family="paragraph" style:parent-style-name="Text_20_body"
+                   style:master-page-name="">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in" style:page-number="auto"/>
+         <style:text-properties fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="P6" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-left="0.7854in" fo:margin-right="0in" fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="P7" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:text-align="start" style:justify-single-word="false"/>
+      </style:style>
+      <style:style style:name="P8" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-left="0.2945in" fo:margin-right="0in" fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="P9" style:family="paragraph" style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-left="0.2945in" fo:margin-right="0in" fo:margin-top="0in"
+                                     fo:margin-bottom="0.1965in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="P10" style:family="paragraph"
+                   style:parent-style-name="Text_20_body"
+                   style:master-page-name="Standard">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in" style:page-number="auto"/>
+         <style:text-properties fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="P11" style:family="paragraph"
+                   style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+      </style:style>
+      <style:style style:name="P12" style:family="paragraph"
+                   style:parent-style-name="Text_20_body">
+         <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.1965in"/>
+         <style:text-properties officeooo:paragraph-rsid="000df541"/>
+      </style:style>
+      <style:style style:name="P13" style:family="paragraph"
+                   style:parent-style-name="Text_20_body"
+                   style:list-style-name="L1">
+         <style:paragraph-properties fo:margin-left="0.2945in" fo:margin-right="0in" fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="P14" style:family="paragraph"
+                   style:parent-style-name="Text_20_body"
+                   style:list-style-name="L1">
+         <style:paragraph-properties fo:margin-left="0.2945in" fo:margin-right="0in" fo:margin-top="0in"
+                                     fo:margin-bottom="0.1965in"
+                                     fo:text-indent="0in"
+                                     style:auto-text-indent="false"/>
+      </style:style>
+      <style:style style:name="T1" style:family="text">
+         <style:text-properties fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="T2" style:family="text">
+         <style:text-properties fo:font-style="italic"/>
+      </style:style>
+      <style:style style:name="T3" style:family="text">
+         <style:text-properties fo:font-style="italic" fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="T4" style:family="text">
+         <style:text-properties officeooo:rsid="000df541"/>
+      </style:style>
+      <text:list-style style:name="L1">
+         <text:list-level-style-bullet text:level="1" style:num-suffix="." text:bullet-char="•">
+            <style:list-level-properties/>
+         </text:list-level-style-bullet>
+         <text:list-level-style-number text:level="2" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="0.75in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="0.75in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="3" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="1in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="4" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.25in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="1.25in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="5" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.5in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="1.5in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="6" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.75in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="1.75in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="7" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="2in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="2in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="8" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="2.25in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="2.25in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="9" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="2.5in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="2.5in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+         <text:list-level-style-number text:level="10" style:num-suffix="." style:num-format="1">
+            <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+               <style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="2.75in"
+                                                 fo:text-indent="-0.25in"
+                                                 fo:margin-left="2.75in"/>
+            </style:list-level-properties>
+         </text:list-level-style-number>
+      </text:list-style>
+      <style:style style:name="gr1" style:family="graphic">
+         <style:graphic-properties draw:stroke="none" draw:fill="none" style:mirror="none"
+                                   style:run-through="background"
+                                   style:wrap="none"
+                                   style:vertical-pos="from-top"
+                                   style:vertical-rel="paragraph"
+                                   style:horizontal-pos="from-left"
+                                   style:horizontal-rel="paragraph"
+                                   draw:wrap-influence-on-position="once-concurrent"
+                                   style:flow-with-text="false"/>
+      </style:style>
+      <style:page-layout style:name="pm1">
+         <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1"
+                                       style:print-orientation="portrait"
+                                       fo:margin-top="0.3937in"
+                                       fo:margin-bottom="0.3937in"
+                                       fo:margin-left="0.7874in"
+                                       fo:margin-right="0.3937in"
+                                       fo:border="none"
+                                       fo:padding="0in"
+                                       fo:background-color="#ffffff"
+                                       style:writing-mode="lr-tb"
+                                       style:footnote-max-height="0in">
+            <style:background-image/>
+            <style:footnote-sep style:width="0.0071in" style:adjustment="left" style:rel-width="25%"
+                                style:color="#000000"/>
+         </style:page-layout-properties>
+         <style:header-style/>
+         <style:footer-style/>
+      </style:page-layout>
+      <style:page-layout style:name="pm2">
+         <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1"
+                                       style:print-orientation="portrait"
+                                       fo:margin-top="0.7874in"
+                                       fo:margin-bottom="0.7874in"
+                                       fo:margin-left="0.7874in"
+                                       fo:margin-right="0.7874in"
+                                       style:writing-mode="lr-tb"
+                                       style:footnote-max-height="0in">
+            <style:footnote-sep style:adjustment="left" style:rel-width="25%" style:color="#000000"/>
+         </style:page-layout-properties>
+         <style:header-style/>
+         <style:footer-style/>
+      </style:page-layout>
+   </office:automatic-styles>
+   <office:master-styles>
+      <style:master-page style:name="Standard" style:page-layout-name="pm1"/>
+      <style:master-page style:name="Endnote" style:page-layout-name="pm2"/>
+   </office:master-styles>
+   <office:body>
+      <office:text text:use-soft-page-breaks="true">
+         <text:sequence-decls>
+            <text:sequence-decl text:display-outline-level="0" text:name="Illustration"/>
+            <text:sequence-decl text:display-outline-level="0" text:name="Table"/>
+            <text:sequence-decl text:display-outline-level="0" text:name="Text"/>
+            <text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
+         </text:sequence-decls>
+         <text:p text:style-name="P10">
+            <text:tab/> 
+            <text:tab/> 
+            <text:tab/>Firetube Ideas and progress</text:p>
+         <text:p text:style-name="P2"/>
+         <text:p text:style-name="P2">
+            <text:bookmark text:name="nnan0"/>How it all started :</text:p>
+         <text:p text:style-name="Preformatted_20_Text">
+            <text:bookmark text:name="nnan5"/>First code import was cake php 1.2</text:p>
+         <text:p text:style-name="Preformatted_20_Text">http://cakeforge.org/frs/download.php/716/cake_1.2.3.8166.tar.bz2/donation=complete</text:p>
+         <text:p text:style-name="Preformatted_20_Text">
+            <text:bookmark text:name="nnan9"/>To clone it on local machine </text:p>
+         <text:p text:style-name="Preformatted_20_Text">
+            <text:bookmark text:name="nnan12"/>$cd /var/www </text:p>
+         <text:p text:style-name="Preformatted_20_Text">or in my case </text:p>
+         <text:p text:style-name="Preformatted_20_Text">$cd /opt/nginx/html</text:p>
+         <text:p text:style-name="P4">
+            <text:bookmark text:name="nnan14"/>$git clone git://github.com/mariuz/firetube.git</text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="nnan15"/>
+            <text:line-break/> 
+            <text:line-break/>Imported into firetube repository http://phpvideotoolkit.sourceforge.net/ <text:line-break/> 
+            <text:line-break/>cd /opt/nginx/html/firetube/app/vendors<text:line-break/>wget http://switch.dl.sourceforge.net/sourceforge/phpvideotoolkit/phpvideotoolkit0.1.5.zip<text:line-break/>rm -rf phpvideotoolkit0.1.5.zip<text:line-break/>git add .<text:line-break/> 
+            <text:line-break/>git commit -a -m 'imported phpvideotoolkit'<text:line-break/>git push origin master<text:line-break/> 
+            <text:line-break/>Installed ffmpeg see this and rewritten the install script in php <text:line-break/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://mapopa.blogspot.com/2008/06/ffmpeg-mplayer-mencoder-script-for.html"
+                    office:name="http://mapopa.blogspot.com/2008/06/ffmpeg-mplayer-mencoder-script-for.html">http://mapopa.blogspot.com/2008/06/ffmpeg-mplayer-mencoder-script-for.html</text:a> 
+            <text:line-break/> 
+            <text:line-break/> 
+            <text:line-break/> 
+            <text:span text:style-name="T1">Other Frameworks that I have studied </text:span>
+            <text:line-break/> 
+            <text:span text:style-name="T1">Prado framework</text:span> and vcl (alternatives to cakephp framework)<text:line-break/>Prado hello world example<text:line-break/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://mapopa.blogspot.com/2008/08/why-delphi-for-php-should-have-used.html"
+                    office:name="http://mapopa.blogspot.com/2008/08/why-delphi-for-php-should-have-used.html">http://mapopa.blogspot.com/2008/08/why-delphi-for-php-should-have-used.html</text:a> 
+            <text:line-break/>delphi4php hello world example<text:line-break/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://mapopa.blogspot.com/2008/09/delphi4php-hello-world-wget-httpswitch.html"
+                    office:name="http://mapopa.blogspot.com/2008/09/delphi4php-hello-world-wget-httpswitch.html">http://mapopa.blogspot.com/2008/09/delphi4php-hello-world-wget-httpswitch.html</text:a> 
+            <text:line-break/> 
+            <text:line-break/> 
+            <text:line-break/>Studied smarty but is too ugly and it does reinvent php<text:line-break/>Imported instead <text:s/>simplehtmldom parser<text:line-break/>A simple PHP HTML DOM parser written in PHP5, supports invalid HTML, and provides a very easy way to handle HTML elements<text:line-break/>Think jQuery for php also it will be made as php extension in the future (faster) <text:line-break/> 
+            <text:line-break/> 
+            <text:a xlink:type="simple" xlink:href="http://simplehtmldom.sourceforge.net/"
+                    office:name="http://simplehtmldom.sourceforge.net/">http://simplehtmldom.sourceforge.net/</text:a> 
+            <text:line-break/> 
+            <text:line-break/>$cd /opt/nginx/html/firetube/app/vendors<text:line-break/>$wget http://ovh.dl.sourceforge.net/sourceforge/simplehtmldom/simplehtmldom_0_99.zip<text:line-break/>$unzip simplehtmldom_0_99.zip<text:line-break/>$rm simplehtmldom_0_99.zip<text:line-break/>$git add simplehtmldom<text:line-break/>$git commit -a<text:line-break/>$git push origin master<text:line-break/> 
+            <text:line-break/>see why<text:line-break/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://mapopa.blogspot.com/2008/09/php-is-template-engine-i-wrote-about.html"
+                    office:name="http://mapopa.blogspot.com/2008/09/php-is-template-engine-i-wrote-about.html">http://mapopa.blogspot.com/2008/09/php-is-template-engine-i-wrote-about.html</text:a> 
+            <text:line-break/> 
+            <text:line-break/>Thanks for Rasmus Lerdorf for the idea (go back to the php roots)<text:line-break/>It was an performance talk on talks.php.net, seems that most of the frameworks are useless<text:line-break/> 
+         </text:p>
+         <text:h text:style-name="Heading_20_1" text:outline-level="1">
+            <text:bookmark text:name="z2-_0"/>
+            <text:soft-page-break/>Make SSH connections with PHP </text:h>
+         <text:p text:style-name="P1">
+            <text:a xlink:type="simple"
+                    xlink:href="http://kevin.vanzonneveld.net/techblog/article/make_ssh_connections_with_php/">http://kevin.vanzonneveld.net/techblog/article/make_ssh_connections_with_php/</text:a> 
+            <text:bookmark text:name="niqh0"/>
+            <text:line-break/> 
+            <text:bookmark text:name="r8o00"/>
+            <text:line-break/>TODO:sshfs/rsync/install</text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="agbv5"/>
+            <text:line-break/> 
+            <text:bookmark text:name="kfjw0"/>MogileFS enables horizontal scaling of storage across any number of machines. Files are replicated between machines according to customizable rules such that at any time a number of drives or machines could be lost without data becoming unavailable. It is designed for high volume applications, such as high traffic websites, to spread storage across cheaper machines without relying on technologies such as <text:bookmark text:name="kfjw1"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Network_File_System_%28protocol%29"
+                    office:name="NFS">NFS</text:a>. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="kfjw2"/>A typical MogileFS cloud consists of a database, some number of trackers, and some number of storage units. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="afrh"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://www.danga.com/words/2005_oscon/oscon-2005.pdf"
+                    office:name="http://www.danga.com/words/2005_oscon/oscon-2005.pdf">http://www.danga.com/words/2005_oscon/oscon-2005.pdf</text:a> 
+         </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="hk_0"/>
+         </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="hk_01"/>see on page 25 </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="d8id"/>
+         </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="ana-0"/> Distributed SSH fs main ideas:<text:line-break/> 
+            <text:line-break/>    files belong to classes<text:line-break/>    classes: minimum replica counts (like in the bittorent case)<text:line-break/>    tracks what disks files are on (each node has info about the others)<text:line-break/>    set disk's state (up, temp_down, dead) and host (in an table state)<text:line-break/>    keep replicas on devices on different hosts (mirror mirror on the flour )<text:line-break/>    Screw RAID! (for this, for databases it's good.)<text:line-break/>    multiple tracker databases (each node can be replica of another one)<text:line-break/>    all share same Firebird database cluster<text:line-break/>    big, cheap disks<text:line-break/>    dumb storage nodes w/ 12, 16 disks, no RAID<text:line-break/> 
+            <text:line-break/> 
+            <text:line-break/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Cloud_storage#Storage"
+                    office:name="http://en.wikipedia.org/wiki/Cloud_storage#Storage">http://en.wikipedia.org/wiki/Cloud_storage#Storage</text:a> 
+         </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="hxf_"/>A <text:bookmark text:name="hxf_0"/>
+            <text:span text:style-name="T2">cloud standard</text:span> is one of a number of existing (typically lightweight) <text:bookmark text:name="hxf_1"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Open_standard"
+                    office:name="open standards">open standards</text:a>that have facilitated the growth of cloud computing, including: </text:p>
+         <text:list xml:id="list486068781" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="hxf_2"/>
+                  <text:span text:style-name="T1">Application</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_5"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Communication"
+                    office:name="Communications">Communications</text:a>(<text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/HTTP"
+                    office:name="HTTP">HTTP</text:a>, <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/XMPP"
+                    office:name="XMPP">XMPP</text:a>) </text:p>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_10"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Security"
+                    office:name="Security">Security</text:a>(<text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/OAuth"
+                    office:name="OAuth">OAuth</text:a>, <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/OpenID"
+                    office:name="OpenID">OpenID</text:a>, <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Transport_Layer_Security"
+                    office:name="TLS">TLS</text:a>) </text:p>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_15"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Web_syndication"
+                    office:name="Syndication">Syndication</text:a>(<text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Atom_%28standard%29"
+                    office:name="Atom">Atom</text:a>) </text:p>
+         <text:list xml:id="list704676682" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="hxf_18"/>
+                  <text:span text:style-name="T1">Client</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_20"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Web_browser"
+                    office:name="Browsers">Browsers</text:a>(<text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Ajax"
+                    office:name="Ajax">Ajax</text:a>) </text:p>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_24"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Online_and_offline"
+                    office:name="Offline">Offline</text:a>(<text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/HTML_5"
+                    office:name="HTML 5">HTML 5</text:a>) </text:p>
+         <text:list xml:id="list1371793137" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="hxf_27"/>
+                  <text:span text:style-name="T1">Infrastructure</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_29"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Platform_virtualization"
+                    office:name="Virtualisation">Virtualisation</text:a>(<text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/OVF"
+                    office:name="OVF">OVF</text:a>) </text:p>
+         <text:list xml:id="list515046482" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="hxf_33"/>
+                  <text:span text:style-name="T1">Platform</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_35"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Solution_stack"
+                    office:name="Solution stacks">Solution stacks</text:a>(<text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29"
+                    office:name="LAMP">LAMP</text:a>) </text:p>
+         <text:list xml:id="list1984458075" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="hxf_39"/>
+                  <text:span text:style-name="T1">Service</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_41"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Data"
+                    office:name="Data">Data</text:a>( <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/JSON"
+                    office:name="JSON">JSON</text:a>) </text:p>
+         <text:p text:style-name="P6">
+            <text:bookmark text:name="hxf_46"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Web_Services"
+                    office:name="Web Services">Web Services</text:a>(<text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Representational_State_Transfer"
+                    office:name="REST">REST</text:a>) </text:p>
+         <text:list xml:id="list1893574528" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P14">
+                  <text:bookmark text:name="hxf_49"/>
+                  <text:span text:style-name="T1">Storage</text:span> 
+               </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P7">
+            <draw:frame text:anchor-type="paragraph" draw:z-index="0" draw:name="graphics1"
+                        draw:style-name="gr1"
+                        svg:width="1.9988in"
+                        svg:height="2.0689in"
+                        svg:x="0in"
+                        svg:y="0in">
+               <draw:image xlink:href="">
+                  <office:binary-data>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5vD444/z4IMPpqPJ8UDFjyBtbW3BjTfeuO62225bHkVRurpgoVCoXbly5U/mz59fP7RHTHrF/v5+Nm7c+OXq6up7HcfxHMdZf8kll3w8l8uhPanh9ri0t7fT3t5OGIYcPnyYbDZbcUb6JZdc8ve33Xbbv4RhmM4J0TTNsCzrU6eddtoVw40iySi5ZcuW53t6ev62rq7uIMA555zzUHNzc3bbtm1ofRp5P8/OnTvp7++ns7OTXC6XlnM8jCCVP6NlCO9///ud00477fvnnHPOlTU1NXpHR8egOQsJURSxd+9ezjjjDJ566in34Ycf/mx9fX3X+vXrb02mjrquy/3330+xWKSxsZFly5bheR6+7+N5nnvhhRdWXs478MUvfvHt69at++pJJ51UvWHDBhYvXjzscbt372bt2rW0t7eLRx999H/uu+++N9x444175s+fX+15Hp7n8fTTT7N161ZM0+T0009PbbYwDNm/f/+X169f/+HpvbvyUvEjyFDOP//8H69fv/7yxPPiOA579uyhtraWXC6H53kcPnyYQqHAggULME2TM88801mzZs3Nd911112lkfMoijj33HNJHgbP81KvTSWNIKXcfPPNF11//fV31NfXA3D22WezefNmLMtKZwH29vbS3d1NY2MjYRiydOlSbenSpa+sq6v7rRBClBriy5YtY+HChUfUTxRFx8UIctwJSFVVVavnyeWqhBDkcjmWLFmSNqCmadTW1tLQ0EAmk0m9LgCmac5J1IOhXqtK92IlVFdXrzBNE9d1ATmSLlq0KBkV0yTEbDaLbdsYhpEeW1VV1Tw052qklxKQGcqGDRuuEkL87pRTTpmdyw2sH61p2rALLfT19XHw4EGefPLJx4QQP/V9/6JEJx/a6KWfGYZROW6sEubNm3f7T3/609edfvrplzY3Nw/6zrKsI2IXhUIB13V5+umnezZu3PjGyy+//D+H1sVw9aNpGp7n5afz3qaC484GAWhra7Orq6v/cs6cOf+7vr7+nOrq6mrbtnEch1L7ore390BXV9f9Bw8e/M4NN9zw69tvv331okWLHqmrq6tLEvCSv8kckUR4enp6nrz66qtPP9b3OlFuueWWs2pra9/R1NT02tra2hbHcbBtm2R08TyP/v7+Ynd39x8PHDjwwzAM/+2GG27o/8lPfvK7lpaWc4Ej6qW0flzX7evo6Lj4uuuue+RY3+tkOC4FpJS2tja9vr5+tmmaTbquN4VhGBiG0em67v4PfehD3UOPv/POOxdzlJXRwzAMXdd98L3vfW/fVF33dHLHHXfU9PX1NRuG0aRpWiaKok5d1zs6Ojo629raBvlr77777myxWHxlGIZH28F207XXXrtlCi9boVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhWLM/H+yOwFqaXozKgAAAABJRU5ErkJggg==</office:binary-data>
+                  <text:p/>
+               </draw:image>
+            </draw:frame>
+            <text:soft-page-break/> 
+            <text:bookmark text:name="jofu"/>
+            <text:s/>
+         </text:p>
+         <text:h text:style-name="Heading_20_2" text:outline-level="2">
+            <text:bookmark text:name="hxf_52"/>A <text:bookmark text:name="y4ry"/>peer to peer (or <text:bookmark text:name="y4ry0"/>P2P) <text:bookmark text:name="y4ry1"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Computer_network"
+                    office:name="computer network">computer network</text:a>uses diverse connectivity between participants in a network and the cumulative <text:bookmark text:name="y4ry2"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Bandwidth_%28computing%29"
+                    office:name="bandwidth">bandwidth</text:a>of network participants rather than conventional centralized resources where a relatively low number of <text:bookmark text:name="y4ry3"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Server_%28computing%29"
+                    office:name="servers">servers</text:a>provide the core value to a service or application. P2P networks are typically used for connecting <text:bookmark text:name="y4ry4"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Node_%28telecommunications%29"
+                    office:name="nodes">nodes</text:a>via largely <text:bookmark text:name="y4ry6"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wiktionary.org/wiki/ad_hoc"
+                    office:name="ad hoc">ad hoc</text:a>connections. Such networks are useful for many purposes. Sharing content files (see <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/File_sharing"
+                    office:name="file sharing">file sharing</text:a>) containing audio, video, data or anything in digital format is very common, and realtime data, such as <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Voice_over_IP"
+                    office:name="telephony">telephony</text:a>traffic, is also passed using P2P technology. </text:h>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="y4ry9"/>A pure P2P network does not have the notion of <text:bookmark text:name="y4ry10"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Client_%28Computing%29"
+                    office:name="clients">clients</text:a>or servers but only equal <text:bookmark text:name="y4ry12"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Peer_group_%28computer_networking%29"
+                    office:name="peer">
+               <text:span text:style-name="T3">peer</text:span>
+            </text:a>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Peer_group_%28computer_networking%29"
+                    office:name="peer"> </text:a>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Node_%28networking%29"
+                    office:name="nodes">nodes</text:a> that simultaneously function as both "clients" and "servers" to the other nodes on the network. This model of network arrangement differs from the <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Client-server"
+                    office:name="client-server">client-server</text:a>model where communication is usually to and from a central server. A typical example of a file transfer that is not P2P is an <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/File_Transfer_Protocol"
+                    office:name="FTP">FTP</text:a>server where the client and server programs are quite distinct, the clients initiate the download/uploads, and the servers react to and satisfy these requests. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="hxf_54"/>
+            <text:line-break/>Networks such as <text:bookmark text:name="cxl."/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Gnutella"
+                    office:name="Gnutella">Gnutella</text:a>or <text:bookmark text:name="cxl.0"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Freenet"
+                    office:name="Freenet">Freenet</text:a>use a P2P structure for all purposes, and are sometimes referred to as true P2P networks, although Gnutella is greatly facilitated by directory servers that inform peers of the network addresses of other peers<text:bookmark text:name="cxl.1"/> 
+            <text:line-break/>.<text:bookmark text:name="cxl.2"/> 
+            <text:line-break/>p2P architecture embodies one of the key technical concepts of the Internet, described in the first Internet <text:bookmark text:name="cxl.3"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Request_for_Comments"
+                    office:name="Request for Comments">Request for Comments</text:a>, <text:bookmark text:name="cxl.4"/>
+            <text:a xlink:type="simple" xlink:href="http://tools.ietf.org/html/rfc1"
+                    office:name="RFC 1">RFC 1</text:a>, "Host Software" dated <text:bookmark text:name="cxl.5"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/April_7"
+                    office:name="7 April">7 April</text:a> 
+            <text:bookmark text:name="cxl.6"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/1969"
+                    office:name="1969">1969</text:a>. More recently, the concept has achieved recognition in the general public in the context of the absence of central indexing <text:bookmark text:name="cxl.7"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Server_%28computing%29"
+                    office:name="servers">servers</text:a>in architectures used for exchanging multimedia files.<text:bookmark text:name="djuu"/> 
+         </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="djuu0"/>In 'pure' P2P networks: </text:p>
+         <text:list xml:id="list1067444317" text:continue-numbering="true" text:style-name="L1">
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="djuu1"/>Peers act as equals, merging the roles of clients and server </text:p>
+            </text:list-item>
+            <text:list-item>
+               <text:p text:style-name="P13">
+                  <text:bookmark text:name="djuu3"/>There is no central server managing the network </text:p>
+            </text:list-item>
+            <text:list-item>
+               <text:p text:style-name="P14">
+                  <text:bookmark text:name="djuu4"/>There is no central router </text:p>
+            </text:list-item>
+         </text:list>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="djuu5"/>Some examples of pure P2P <text:bookmark text:name="djuu6"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Application_layer"
+                    office:name="application layer">application layer</text:a>networks designed for <text:bookmark text:name="djuu7"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/File_sharing"
+                    office:name="file sharing">file sharing</text:a>are <text:bookmark text:name="djuu8"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Gnutella"
+                    office:name="Gnutella">Gnutella</text:a>and <text:bookmark text:name="djuu9"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Freenet"
+                    office:name="Freenet">Freenet</text:a>. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z305"/>
+         </text:p>
+         <text:h text:style-name="Heading_20_2" text:outline-level="2">
+            <text:bookmark text:name="z3051"/>Advantages of P2P networks </text:h>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z3053"/>An important goal in P2P networks is that all clients provide resources, including <text:bookmark text:name="z3054"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Bandwidth_%28computing%29"
+                    office:name="bandwidth">bandwidth</text:a>, storage space, and computing power. Thus, as nodes arrive and demand on the system increases, the total <text:soft-page-break/>capacity of the system also increases. This is not true of a client-server architecture with a fixed set of servers, in which adding more clients could mean slower data transfer for all users. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z3055"/>The distributed nature of P2P networks also increases robustness in case of failures by replicating data over multiple peers, and -- in pure P2P systems -- by enabling peers to find the data without relying on a centralized index server. In the latter case, there is no <text:bookmark text:name="z3056"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Reliable_system_design"
+                    office:name="single point of failure">single point of failure</text:a>in the system.<text:bookmark text:name="cite_ref-0"/> 
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Peer_to_peer#cite_note-0"
+                    office:name="[1]">[1]</text:a> 
+         </text:p>
+         <text:h text:style-name="Heading_20_2" text:outline-level="2">
+            <text:bookmark text:name="z3058"/>Unstructured and structured P2P networks </text:h>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z30512"/>The P2P <text:bookmark text:name="z30513"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Overlay_network"
+                    office:name="overlay network">overlay network</text:a>consists of all the participating peers as network nodes. There are links between any two nodes that know each other: i.e. if a participating peer knows the location of another peer in the P2P network, then there is a directed edge from the former node to the latter in the overlay network. Based on how the nodes in the overlay network are linked to each other, we can classify the P2P networks as unstructured or structured. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z30514"/>An unstructured P2P network is formed when the overlay links are established arbitrarily. Such networks can be easily constructed as a new peer that wants to join the network can copy existing links of another node and then form its own links over time. In an unstructured P2P network, if a peer wants to find a desired piece of data in the network, the query has to be flooded through the network to find as many peers as possible that share the data. The main disadvantage with such networks is that the queries may not always be resolved. Popular content is likely to be available at several peers and any peer searching for it is likely to find the same thing. But if a peer is looking for rare data shared by only a few other peers, then it is highly unlikely that search will be successful. Since there is no correlation between a peer and the content managed by it, there is no guarantee that flooding will find a peer that has the desired data. Flooding also causes a high amount of signaling traffic in the network and hence such networks typically have very poor search efficiency. Most of the popular P2P networks such as <text:bookmark text:name="z30515"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Gnutella"
+                    office:name="Gnutella">Gnutella</text:a>and <text:bookmark text:name="z30516"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/FastTrack"
+                    office:name="FastTrack">FastTrack</text:a>are unstructured. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="z30517"/>Structured P2P network employ a globally consistent protocol to ensure that any node can efficiently route a search to some peer that has the desired file, even if the file is extremely rare. Such a guarantee necessitates a more structured pattern of overlay links. By far the most common type of structured P2P network is the <text:bookmark text:name="z30518"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Distributed_hash_table"
+                    office:name="distributed hash table">distributed hash table</text:a>(DHT), in which a variant of <text:bookmark text:name="z30519"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Consistent_hashing"
+                    office:name="consistent hashing">consistent hashing</text:a>is used to assign ownership of each file to a particular peer, in a way analogous to a traditional <text:bookmark text:name="z30520"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Hash_table"
+                    office:name="hash table">hash table</text:a>'s assignment of each key to a particular array slot. </text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="jqj1"/>
+            <text:bookmark text:name="jqj10"/>
+            <text:line-break/> 
+            <text:bookmark text:name="fpi9"/>
+            <text:a xlink:type="simple" xlink:href="http://en.wikipedia.org/wiki/Gnutella"
+                    office:name="http://en.wikipedia.org/wiki/Gnutella">http://en.wikipedia.org/wiki/Gnutella</text:a> 
+            <text:bookmark text:name="jqj11"/>
+            <text:line-break/> 
+            <text:bookmark text:name="jqj12"/>
+            <text:line-break/>IDEA :sessions in database<text:bookmark text:name="wktk"/> 
+            <text:line-break/> 
+            <text:bookmark text:name="ypnm"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://kevin.vanzonneveld.net/techblog/article/enhance_php_session_management/"
+                    office:name="http://kevin.vanzonneveld.net/techblog/article/enhance_php_session_management/">http://kevin.vanzonneveld.net/techblog/article/enhance_php_session_management/</text:a> 
+            <text:bookmark text:name="wktk0"/>
+            <text:line-break/> 
+            <text:bookmark text:name="wktk1"/>
+            <text:line-break/> 
+            <text:bookmark text:name="jqj13"/>
+            <text:line-break/> 
+            <text:bookmark text:name="sam9"/>
+            <text:line-break/>IDEA:nginx + multiple Fastcgi backends<text:bookmark text:name="eihq1"/> 
+            <text:line-break/>http://bookmarks.honewatson.com/2008/04/24/multiple-fastcgi-php-servers-nginx-load-balancing/<text:bookmark text:name="wktk2"/> 
+            <text:line-break/>IDEA: FIREBIRD FS<text:bookmark text:name="yatm0"/> , skip the all <text:line-break/>http://www.linux.com/feature/127055<text:bookmark text:name="o4m6"/> 
+            <text:line-break/>IDEA:php-fpm<text:bookmark text:name="o4m60"/> 
+            <text:line-break/>if you’re using spawn-fcgi from lighttpd consider replacing it with <text:bookmark text:name="o4m61"/>
+            <text:a xlink:type="simple" xlink:href="http://php-fpm.anight.org/docs.html"
+                    office:name="php-fpm">php-fpm</text:a>.</text:p>
+         <text:p text:style-name="P1">
+            <text:bookmark text:name="wktk3"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://interfacelab.com/nginx-php-fpm-apc-awesome/">http://interfacelab.com/nginx-php-fpm-apc-awesome/</text:a> 
+            <text:line-break/>IDEA:kvmfs<text:bookmark text:name="agbv6"/> 
+            <text:line-break/> 
+            <text:bookmark text:name="p3ya"/>http://www.linuxinsight.com/files/ols2007/mirtchovski-reprint.pdf<text:line-break/>IDEA:v9 fs<text:bookmark text:name="p3ya0"/> 
+            <text:line-break/> 
+            <text:a xlink:type="simple" xlink:href="http://swik.net/v9fs">http://swik.net/v9fs</text:a> 
+         </text:p>
+         <text:p text:style-name="P3">TODO:</text:p>
+         <text:p text:style-name="P1">To add to the database init script (create database script )<text:bookmark text:name="tqm11"/> 
+            <text:line-break/>
+            <text:soft-page-break/> http://www.ibphoenix.com/main.nfs?a=ibphoenix&amp;page=ibp_howto8<text:bookmark text:name="gd8o"/> 
+            <text:line-break/> 
+         </text:p>
+         <text:p text:style-name="P1"/>
+         <text:p text:style-name="P1">TOSTUDY:Distributed Filesystems<text:bookmark text:name="y8hg"/> 
+            <text:line-break/> 
+            <text:bookmark text:name="y8hg0"/>
+            <text:line-break/> 
+            <text:bookmark text:name="y8hg1"/>
+            <text:span text:style-name="T1">Google FS</text:span> 
+            <text:bookmark text:name="jf7y0"/>
+            <text:line-break/> 
+            <text:bookmark text:name="gggn"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Google_File_System"
+                    office:name="http://en.wikipedia.org/wiki/Google_File_System">http://en.wikipedia.org/wiki/Google_File_System</text:a> 
+            <text:bookmark text:name="y8hg2"/>
+            <text:line-break/> 
+            <text:bookmark text:name="y8hg3"/>
+            <text:span text:style-name="T1">Lustre</text:span> 
+            <text:bookmark text:name="l:br"/>
+            <text:line-break/> 
+            <text:bookmark text:name="gobx"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Lustre_%28file_system%29"
+                    office:name="http://en.wikipedia.org/wiki/Lustre_(file_system)">http://en.wikipedia.org/wiki/Lustre_(file_system)</text:a> 
+            <text:bookmark text:name="l:br0"/>
+            <text:line-break/> 
+            <text:bookmark text:name="y8hg4"/>
+            <text:span text:style-name="T1">Plan 9 FS used in kvm </text:span>
+            <text:bookmark text:name="l:br1"/>
+            <text:line-break/> 
+            <text:bookmark text:name="fff-"/>
+            <text:a xlink:type="simple"
+                    xlink:href="http://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs"
+                    office:name="http://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs">http://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs</text:a> 
+            <text:bookmark text:name="y8hg5"/>
+            <text:line-break/> 
+            <text:bookmark text:name="q:_8"/>
+            <text:a xlink:type="simple" xlink:href="http://swik.net/v9fs"
+                    office:name="http://swik.net/v9fs">http://swik.net/v9fs</text:a> 
+         </text:p>
+         <text:p text:style-name="P12">
+            <text:bookmark text:name="wktk6"/>
+            <text:span text:style-name="T4">Study Linux single sistem images</text:span>
+         </text:p>
+         <text:p text:style-name="P12">
+            <text:a xlink:type="simple"
+                    xlink:href="http://perilsofparallel.blogspot.com/2009/01/multi-multicore-single-system-image_20.html">
+               <text:span text:style-name="T4">http://perilsofparallel.blogspot.com/2009/01/multi-multicore-single-system-image_20.html</text:span>
+            </text:a>
+         </text:p>
+         <text:p text:style-name="P12">
+            <text:a xlink:type="simple" xlink:href="http://www.osrg.net/sheepdog/">
+               <text:span text:style-name="T4">http://www.osrg.net/sheepdog/</text:span>
+            </text:a>
+         </text:p>
+         <text:p text:style-name="P12"/>
+      </office:text>
+   </office:body>
+</office:document>
