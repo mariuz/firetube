@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2006-2008, Cake Software Foundation, Inc.
+ * CakePHP :  Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc.
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2006-2008, Cake Software Foundation, Inc.
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc.
+ * @link          http://cakefoundation.org/projects/info/cakephp CakePHP Project
  * @package       cake
  * @subpackage    cake.cake.libs.model.behaviors
  * @since         CakePHP v 1.2.0.4487
@@ -28,7 +27,7 @@
  * Tree Behavior.
  *
  * Enables a model object to act as a node-based tree. Using Modified Preorder Tree Traversal
- * 
+ *
  * @see http://en.wikipedia.org/wiki/Tree_traversal
  * @package       cake
  * @subpackage    cake.cake.libs.model.behaviors
@@ -138,15 +137,6 @@ class TreeBehavior extends ModelBehavior {
 	function beforeSave(&$Model) {
 		extract($this->settings[$Model->alias]);
 
-		if (isset($Model->data[$Model->alias][$Model->primaryKey])) {
-			if ($Model->data[$Model->alias][$Model->primaryKey]) {
-				if (!$Model->id) {
-					$Model->id = $Model->data[$Model->alias][$Model->primaryKey];
-				}
-			}
-			unset($Model->data[$Model->alias][$Model->primaryKey]);
-		}
-
 		$this->_addToWhitelist($Model, array($left, $right));
 		if (!$Model->id) {
 			if (array_key_exists($parent, $Model->data[$Model->alias]) && $Model->data[$Model->alias][$parent]) {
@@ -173,10 +163,15 @@ class TreeBehavior extends ModelBehavior {
 				$Model->data[$Model->alias][$parent] = null;
 				$this->_addToWhitelist($Model, $parent);
 			} else {
-				list($node) = array_values($Model->find('first', array(
+				$values = $Model->find('first', array(
 					'conditions' => array($scope,$Model->escapeField() => $Model->id),
 					'fields' => array($Model->primaryKey, $parent, $left, $right ), 'recursive' => $recursive)
-				));
+				);
+
+				if ($values === false) {
+					return false;
+				}
+				list($node) = array_values($values);
 
 				$parentNode = $Model->find('first', array(
 					'conditions' => array($scope, $Model->escapeField() => $Model->data[$Model->alias][$parent]),
@@ -281,7 +276,7 @@ class TreeBehavior extends ModelBehavior {
 		if (!$id) {
 			$conditions = $scope;
 		} else {
-			$result = array_values($Model->find('first', array(
+			$result = array_values((array)$Model->find('first', array(
 				'conditions' => array($scope, $Model->escapeField() => $id),
 				'fields' => array($left, $right),
 				'recursive' => $recursive
@@ -460,7 +455,7 @@ class TreeBehavior extends ModelBehavior {
 			'fields' => array($Model->primaryKey, $left, $right), 'recursive' => $recursive)
 		);
 		if ($nextNode) {
-			list($nextNode)= array_values($nextNode);
+			list($nextNode) = array_values($nextNode);
 		} else {
 			return false;
 		}
@@ -616,9 +611,9 @@ class TreeBehavior extends ModelBehavior {
  * This method does not change the parent of any node.
  *
  * Requires a valid tree, by default it verifies the tree before beginning.
- * 
+ *
  * Options:
- * 
+ *
  * - 'id' id of record to use as top node for reordering
  * - 'field' Which field to use in reordeing defaults to displayField
  * - 'order' Direction to order either DESC or ASC (defaults to ASC)
@@ -640,6 +635,8 @@ class TreeBehavior extends ModelBehavior {
 		$sort = $field . ' ' . $order;
 		$nodes = $this->children($Model, $id, true, $fields, $sort, null, null, $recursive);
 
+		$cacheQueries = $Model->cacheQueries;
+		$Model->cacheQueries = false;
 		if ($nodes) {
 			foreach ($nodes as $node) {
 				$id = $node[$Model->alias][$Model->primaryKey];
@@ -649,6 +646,7 @@ class TreeBehavior extends ModelBehavior {
 				}
 			}
 		}
+		$Model->cacheQueries = $cacheQueries;
 		return true;
 	}
 /**
@@ -693,7 +691,10 @@ class TreeBehavior extends ModelBehavior {
 		}
 
 		$db =& ConnectionManager::getDataSource($Model->useDbConfig);
-		$Model->updateAll(array($parent => $db->value($node[$parent], $parent)), array($parent => $node[$Model->primaryKey]));
+		$Model->updateAll(
+			array($parent => $db->value($node[$parent], $parent)), 
+			array($Model->escapeField($parent) => $node[$Model->primaryKey])
+		);
 		$this->__sync($Model, 1, '-', 'BETWEEN ' . ($node[$left] + 1) . ' AND ' . ($node[$right] - 1));
 		$this->__sync($Model, 2, '-', '> ' . ($node[$right]));
 		$Model->id = $id;
@@ -814,11 +815,16 @@ class TreeBehavior extends ModelBehavior {
 			$this->__sync($Model, $edge - $node[$left] + 1, '+', 'BETWEEN ' . $node[$left] . ' AND ' . $node[$right], $created);
 			$this->__sync($Model, $node[$right] - $node[$left] + 1, '-', '> ' . $node[$left], $created);
 		} else {
-			$parentNode = array_values($Model->find('first', array(
+			$values = $Model->find('first', array(
 				'conditions' => array($scope, $Model->escapeField() => $parentId),
 				'fields' => array($Model->primaryKey, $left, $right),
 				'recursive' => $recursive
-			)));
+			));
+
+			if ($values === false) {
+				return false;
+			}
+			$parentNode = array_values($values);
 
 			if (empty($parentNode) || empty($parentNode[0])) {
 				return false;

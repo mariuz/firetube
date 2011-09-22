@@ -7,13 +7,12 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) : Rapid Development Framework (http://www.cakephp.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     CakePHP(tm) : Rapid Development Framework (http://www.cakephp.org)
+ * @copyright     CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * @link          http://www.cakephp.org
  * @package       cake
  * @subpackage    cake.tests.cases.libs.model
@@ -975,6 +974,8 @@ class BehaviorTest extends CakeTestCase {
 		$Apple->set('field', 'value');
 		$this->assertTrue($Apple->testData());
 		$this->assertTrue($Apple->data['Apple']['field_2']);
+
+		$this->assertTrue($Apple->testData('one', 'two', 'three', 'four', 'five', 'six'));
 	}
 /**
  * testBehaviorTrigger method

@@ -5,15 +5,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs
  * @since         CakePHP(tm) v 1.2.0
@@ -340,9 +339,11 @@ class Set extends Object {
 		return $out;
 	}
 /**
- * Implements partial support for XPath 2.0. If $path is an array or $data is empty it the call is delegated to Set::classicExtract.
+ * Implements partial support for XPath 2.0. If $path is an array or $data is empty it the call 
+ * is delegated to Set::classicExtract.
  *
- * Currently implemented selectors:
+ * #### Currently implemented selectors:
+ *
  * - /User/id (similar to the classic {n}.User.id)
  * - /User[2]/name (selects the name of the second User)
  * - /User[id>2] (selects all Users with an id > 2)
@@ -355,11 +356,13 @@ class Set extends Object {
  * - /Comment[text=/cakephp/i] (Selects the all comments that have a text matching the regex /cakephp/i)
  * - /Comment/@* (Selects the all key names of all comments)
  *
- * Other limitations:
+ * #### Other limitations:
+ *
  * - Only absolute paths starting with a single '/' are supported right now
  *
- * Warning: Even so it has plenty of unit tests the XPath support has not gone through a lot of real-world testing. Please report
- * Bugs as you find them. Suggestions for additional features to imlement are also very welcome!
+ * **Warning**: Even so it has plenty of unit tests the XPath support has not gone through a lot of 
+ * real-world testing. Please report Bugs as you find them. Suggestions for additional features to 
+ * implement are also very welcome!
  *
  * @param string $path An absolute XPath 2.0 path
  * @param string $data An array of data to extract from
@@ -387,11 +390,11 @@ class Set extends Object {
 		$options = array_merge(array('flatten' => true), $options);
 		if (!isset($contexts[0])) {
 			$current = current($data);
-			if ((is_array($current) && count($data) <= 1) || !is_array($current) || !Set::numeric(array_keys($data))) {
+			if ((is_array($current) && count($data) < 1) || !is_array($current) || !Set::numeric(array_keys($data))) {
 				$contexts = array($data);
 			}
 		}
-		$tokens = array_slice(preg_split('/(?<!=)\/(?![a-z-]*\])/', $path), 1);
+		$tokens = array_slice(preg_split('/(?<!=)\/(?![a-z-\s]*\])/', $path), 1);
 
 		do {
 			$token = array_shift($tokens);
@@ -409,7 +412,7 @@ class Set extends Object {
 					if (count($context['trace']) == 1) {
 						$context['trace'][] = $context['key'];
 					}
-					$parent = join('/', $context['trace']) . '/.';
+					$parent = implode('/', $context['trace']) . '/.';
 					$context['item'] = Set::extract($parent, $data);
 					$context['key'] = array_pop($context['trace']);
 					if (isset($context['trace'][1]) && $context['trace'][1] > 0) {
@@ -429,13 +432,21 @@ class Set extends Object {
 						'key' => $key,
 						'item' => array_keys($context['item']),
 					);
+				} elseif (($key === $token || (ctype_digit($token) && $key == $token) || $token === '.')) {
+					$context['trace'][] = $key;
+					$matches[] = array(
+						'trace' => $context['trace'],
+						'key' => $key,
+						'item' => $context['item'],
+					);
 				} elseif (is_array($context['item']) && array_key_exists($token, $context['item'])) {
 					$items = $context['item'][$token];
 					if (!is_array($items)) {
 						$items = array($items);
 					} elseif (!isset($items[0])) {
 						$current = current($items);
-						if ((is_array($current) && count($items) <= 1) || !is_array($current)) {
+						$currentKey = key($items);
+						if (!is_array($current) || (is_array($current) && count($items) <= 1 && !is_numeric($currentKey))) {
 							$items = array($items);
 						}
 					}
@@ -444,18 +455,18 @@ class Set extends Object {
 						$ctext = array($context['key']);
 						if (!is_numeric($key)) {
 							$ctext[] = $token;
-							$token = array_shift($tokens);
-							if (isset($items[$token])) {
-								$ctext[] = $token;
-								$item = $items[$token];
+							$tok = array_shift($tokens);
+							if (isset($items[$tok])) {
+								$ctext[] = $tok;
+								$item = $items[$tok];
 								$matches[] = array(
 									'trace' => array_merge($context['trace'], $ctext),
-									'key' => $key,
+									'key' => $tok,
 									'item' => $item,
 								);
 								break;
-							} else {
-								array_unshift($tokens, $token);
+							} elseif ($tok !== null) {
+								array_unshift($tokens, $tok);
 							}
 						} else {
 							$key = $token;
@@ -467,13 +478,6 @@ class Set extends Object {
 							'item' => $item,
 						);
 					}
-				} elseif (($key === $token || (ctype_digit($token) && $key == $token) || $token === '.')) {
-					$context['trace'][] = $key;
-					$matches[] = array(
-						'trace' => $context['trace'],
-						'key' => $key,
-						'item' => $context['item'],
-					);
 				}
 			}
 			if ($conditions) {
@@ -482,7 +486,7 @@ class Set extends Object {
 					$length = count($matches);
 					foreach ($matches as $i => $match) {
 						if (Set::matches(array($condition), $match['item'], $i + 1, $length)) {
-							$filtered[] = $match;
+							$filtered[$i] = $match;
 						}
 					}
 					$matches = $filtered;
@@ -944,6 +948,9 @@ class Set extends Object {
 		} else {
 			$keys = Set::extract($data, $path1);
 		}
+		if (empty($keys)) {
+			return array();
+		}
 
 		if (!empty($path2) && is_array($path2)) {
 			$format = array_shift($path2);
@@ -975,7 +982,9 @@ class Set extends Object {
 				return $out;
 			}
 		}
-
+		if (empty($vals)) {
+			return array();
+		}
 		return array_combine($keys, $vals);
 	}
 /**
@@ -1073,7 +1082,7 @@ class Set extends Object {
 			if (!is_null($key)) {
 				$id = $key;
 			}
-			if (is_array($r) && count($r)) {
+			if (is_array($r) && !empty($r)) {
 				$stack = array_merge($stack, Set::__flatten($r, $id));
 			} else {
 				$stack[] = array('id' => $id, 'value' => $r);

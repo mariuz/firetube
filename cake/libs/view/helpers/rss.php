@@ -5,15 +5,14 @@
  *
  * Simplifies the output of RSS feeds.
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.view.helpers
  * @since         CakePHP(tm) v 1.2
@@ -195,6 +194,13 @@ class RssHelper extends XmlHelper {
 
 		foreach ($elements as $key => $val) {
 			$attrib = array();
+			
+			$escape = true;
+			if (is_array($val) && isset($val['convertEntities'])) {
+				$escape = $val['convertEntities'];
+				unset($val['convertEntities']);
+			}
+			
 			switch ($key) {
 				case 'pubDate' :
 					$val = $this->time($val);
@@ -209,7 +215,7 @@ class RssHelper extends XmlHelper {
 							}
 							$categories[] = $this->elem($key, $attrib, $category);
 						}
-						$elements[$key] = join('', $categories);
+						$elements[$key] = implode('', $categories);
 						continue 2;
 					} else if (is_array($val) && isset($val['domain'])) {
 						$attrib['domain'] = $val['domain'];
@@ -248,18 +254,13 @@ class RssHelper extends XmlHelper {
 					$val = null;
 				break;
 			}
-			$escape = true;
-			if (is_array($val) && isset($val['convertEntities'])) {
-				$escape = $val['convertEntities'];
-				unset($val['convertEntities']);
-			}
 			if (!is_null($val) && $escape) {
 				$val = h($val);
 			}
 			$elements[$key] = $this->elem($key, $attrib, $val);
 		}
 		if (!empty($elements)) {
-			$content = join('', $elements);
+			$content = implode('', $elements);
 		}
 		return $this->output($this->elem('item', $att, $content, !($content === null)));
 	}

@@ -5,15 +5,14 @@
  *
  * Simplifies the construction of HTML elements.
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.view.helpers
  * @since         CakePHP(tm) v 0.9.1
@@ -238,7 +237,7 @@ class HtmlHelper extends AppHelper {
 			}
 			$out .= sprintf($this->tags['metalink'], $attributes['link'], $this->_parseAttributes($attributes, array('link'), ' ', ' '));
 		} else {
-			$out = sprintf($this->tags['meta'], $this->_parseAttributes($attributes, array('type')));
+			$out = sprintf($this->tags['meta'], $this->_parseAttributes($attributes, array('type'), ' ', ' '));
 		}
 
 		if ($inline) {
@@ -344,20 +343,24 @@ class HtmlHelper extends AppHelper {
 			}
 
 			if (strpos($path, '?') === false) {
-				if (strpos($path, '.css') === false) {
+				if (!preg_match('/.*\.(css|php)$/i', $path)) {
 					$path .= '.css';
 				}
 			}
+			$timestampEnabled = (
+				(Configure::read('Asset.timestamp') === true && Configure::read() > 0) ||
+				Configure::read('Asset.timestamp') === 'force'
+			);
 
-			$path = $this->webroot($path);
-
-			$url = $path;
-			if (strpos($path, '?') === false && ((Configure::read('Asset.timestamp') === true && Configure::read() > 0) || Configure::read('Asset.timestamp') === 'force')) {
+			$url = $this->webroot($path);
+			if (strpos($path, '?') === false && $timestampEnabled) {
 				$url .= '?' . @filemtime(WWW_ROOT . str_replace('/', DS, $path));
 			}
-
 			if (Configure::read('Asset.filter.css')) {
-				$url = str_replace(CSS_URL, 'ccss/', $url);
+				$pos = strpos($url, CSS_URL);
+				if ($pos !== false) {
+					$url = substr($url, 0, $pos) . 'ccss/' . substr($url, $pos + strlen(CSS_URL));
+				}
 			}
 		}
 
@@ -394,9 +397,9 @@ class HtmlHelper extends AppHelper {
 			$out[] = $key.':'.$value.';';
 		}
 		if ($inline) {
-			return join(' ', $out);
+			return implode(' ', $out);
 		}
-		return join("\n", $out);
+		return implode("\n", $out);
 	}
 /**
  * Returns the breadcrumb trail as a sequence of &raquo;-separated links.
@@ -406,7 +409,7 @@ class HtmlHelper extends AppHelper {
  * @return string
  */
 	function getCrumbs($separator = '&raquo;', $startText = false) {
-		if (count($this->_crumbs)) {
+		if (!empty($this->_crumbs)) {
 			$out = array();
 			if ($startText) {
 				$out[] = $this->link($startText, '/');
@@ -419,7 +422,7 @@ class HtmlHelper extends AppHelper {
 					$out[] = $crumb[0];
 				}
 			}
-			return $this->output(join($separator, $out));
+			return $this->output(implode($separator, $out));
 		} else {
 			return null;
 		}
@@ -434,13 +437,15 @@ class HtmlHelper extends AppHelper {
 	function image($path, $options = array()) {
 		if (is_array($path)) {
 			$path = $this->url($path);
-		} elseif ($path[0] === '/') {
-			$path = $this->webroot($path);
 		} elseif (strpos($path, '://') === false) {
-			$path = $this->webroot(IMAGES_URL . $path);
+			if ($path[0] !== '/') {
+				$path = IMAGES_URL . $path;
+			}
 
 			if ((Configure::read('Asset.timestamp') == true && Configure::read() > 0) || Configure::read('Asset.timestamp') === 'force') {
-				$path .= '?' . @filemtime(str_replace('/', DS, WWW_ROOT . $path));
+				$path = $this->webroot($path) . '?' . @filemtime(WWW_ROOT . str_replace('/', DS, $path));
+			} else {
+				$path = $this->webroot($path);
 			}
 		}
 
@@ -475,7 +480,7 @@ class HtmlHelper extends AppHelper {
 		foreach ($names as $arg) {
 			$out[] = sprintf($this->tags['tableheader'], $this->_parseAttributes($thOptions), $arg);
 		}
-		$data = sprintf($this->tags['tablerow'], $this->_parseAttributes($trOptions), join(' ', $out));
+		$data = sprintf($this->tags['tablerow'], $this->_parseAttributes($trOptions), implode(' ', $out));
 		return $this->output($data);
 	}
 /**
@@ -525,9 +530,9 @@ class HtmlHelper extends AppHelper {
 				$cellsOut[] = sprintf($this->tags['tablecell'], $this->_parseAttributes($cellOptions), $cell);
 			}
 			$options = $this->_parseAttributes($count % 2 ? $oddTrOptions : $evenTrOptions);
-			$out[] = sprintf($this->tags['tablerow'], $options, join(' ', $cellsOut));
+			$out[] = sprintf($this->tags['tablerow'], $options, implode(' ', $cellsOut));
 		}
-		return $this->output(join("\n", $out));
+		return $this->output(implode("\n", $out));
 	}
 /**
  * Returns a formatted block tag, i.e DIV, SPAN, P.

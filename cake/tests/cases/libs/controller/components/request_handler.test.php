@@ -8,13 +8,12 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
  * @package       cake
  * @subpackage    cake.tests.cases.libs.controller.components
@@ -70,6 +69,15 @@ class RequestHandlerTestController extends Controller {
 	function destination() {
 		$this->viewPath = 'posts';
 		$this->render('index');
+	}
+/**
+ * test method for ajax redirection + parameter parsing
+ *
+ * @return void
+ */
+	function param_method($one = null, $two = null) {
+		echo "one: $one two: $two";
+		$this->autoRender = false;
 	}
 }
 /**
@@ -258,6 +266,10 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$this->assertFalse(in_array('Xml', $this->Controller->helpers));
 		$this->RequestHandler->renderAs($this->Controller, 'xml');
 		$this->assertTrue(in_array('Xml', $this->Controller->helpers));
+
+		$this->Controller->viewPath = 'request_handler_test\\xml';
+		$this->RequestHandler->renderAs($this->Controller, 'js');
+		$this->assertEqual($this->Controller->viewPath, 'request_handler_test' . DS . 'js');
 	}
 /**
  * test that calling renderAs() more than once continues to work.
@@ -267,13 +279,13 @@ class RequestHandlerComponentTest extends CakeTestCase {
  **/
 	function testRenderAsCalledTwice() {
 		$this->RequestHandler->renderAs($this->Controller, 'xml');
-		$this->assertEqual($this->Controller->viewPath, 'request_handler_test/xml');
+		$this->assertEqual($this->Controller->viewPath, 'request_handler_test' . DS . 'xml');
 		$this->assertEqual($this->Controller->layoutPath, 'xml');
 		
 		$this->assertTrue(in_array('Xml', $this->Controller->helpers));
 
 		$this->RequestHandler->renderAs($this->Controller, 'js');
-		$this->assertEqual($this->Controller->viewPath, 'request_handler_test/js');
+		$this->assertEqual($this->Controller->viewPath, 'request_handler_test' . DS . 'js');
 		$this->assertEqual($this->Controller->layoutPath, 'js');
 		$this->assertTrue(in_array('Js', $this->Controller->helpers));
 	}
@@ -537,6 +549,35 @@ class RequestHandlerComponentTest extends CakeTestCase {
 
 		Configure::write('viewPaths', $_paths);
 		unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+	}
+
+/**
+ * test that the beforeRedirect callback properly converts
+ * array urls into their correct string ones, and adds base => false so
+ * the correct urls are generated.
+ *
+ * @link http://cakephp.lighthouseapp.com/projects/42648-cakephp-1x/tickets/276
+ * @return void
+ */
+	function testBeforeRedirectCallbackWithArrayUrl() {
+		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+		$_paths = Configure::read('viewPaths');
+		Configure::write('viewPaths', array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'views'. DS));
+		Router::setRequestInfo(array(
+			array('plugin' => null, 'controller' => 'accounts', 'action' => 'index', 'pass' => array(), 'named' => array(), 'form' => array(), 'url' => array('url' => 'accounts/'), 'bare' => 0),
+			array('base' => '/officespace', 'here' => '/officespace/accounts/', 'webroot' => '/officespace/')
+		));
+
+		$RequestHandler =& new NoStopRequestHandler();
+
+		ob_start();
+		$RequestHandler->beforeRedirect(
+			$this->Controller,
+			array('controller' => 'request_handler_test', 'action' => 'param_method', 'first', 'second')
+		);
+		$result = ob_get_clean();
+		$this->assertEqual($result, 'one: first two: second');
+		Configure::write('viewPaths', $_paths);
 	}
 }
 ?>

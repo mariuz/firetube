@@ -8,13 +8,12 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
  * @package       cake
  * @subpackage    cake.tests.cases.libs
@@ -114,7 +113,6 @@ class XmlTest extends CakeTestCase {
 		$result =& new Xml($data, array('format' => 'tags'));
 		$expected = '<statuses><status><id>1</id></status><status><id>2</id></status></statuses>';
 		$this->assertIdentical($result->toString(), $expected);
-
 	}
 
 /**
@@ -175,6 +173,35 @@ class XmlTest extends CakeTestCase {
 		$result = $xml->toString(false);
 		$expected = '<hello><![CDATA[world]]></hello>';
 		$this->assertEqual($expected, $result);
+	}
+/**
+ * testSimpleArrayWithZeroValues method
+ *
+ * @access public
+ * @return void
+ */
+	function testSimpleArrayWithZeroValues() {
+		$xml = new Xml(array('zero_string' => '0', 'zero_integer' => 0), array('format' => 'tags'));
+
+		$result = $xml->toString(false);
+		$expected = '<zero_string>0</zero_string><zero_integer>0</zero_integer>';
+		$this->assertEqual($expected, $result);
+
+		$data = array(
+			'Client' => array(
+				'id' => 3,
+				'object_id' => 9,
+				'key' => 'alt',
+				'name' => 'Client Two',
+				'created_by' => 4,
+				'status' => '0',
+				'num_projects' => 0
+			)
+		);
+		$xml = new Xml($data, array('format' => 'tags'));
+		$result = $xml->toString(array('format' => 'tags', 'header' => false));
+		$this->assertPattern('/<status>0<\/status>/', $result);
+		$this->assertPattern('/<num_projects>0<\/num_projects>/', $result);
 	}
 /**
  * testHeader method
@@ -245,7 +272,7 @@ class XmlTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testArraySerialization() {
+	function testSerializationArray() {
 		$input = array(
 			array(
 				'Project' => array('id' => 1, 'title' => null, 'client_id' => 1, 'show' => 1, 'is_spotlight' => null, 'style_id' => 0, 'job_type_id' => 1, 'industry_id' => 1, 'modified' => null, 'created' => null),
@@ -272,7 +299,7 @@ class XmlTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testNestedArraySerialization() {
+	function testSerializationNestedArray() {
 		$input = array(
 			array(
 				'Project' => array('id' => 1, 'title' => null, 'client_id' => 1, 'show' => 1, 'is_spotlight' => null, 'style_id' => 0, 'job_type_id' => 1, 'industry_id' => 1, 'modified' => null, 'created' => null),
@@ -317,9 +344,9 @@ class XmlTest extends CakeTestCase {
  */
 	function testArraySerializationWithRoot() {
 		$input = array(
-					array('Shirt' => array('id' => 1, 'color' => 'green')),
-					array('Shirt' => array('id' => 2, 'color' => 'blue')),
-					);
+			array('Shirt' => array('id' => 1, 'color' => 'green')),
+			array('Shirt' => array('id' => 2, 'color' => 'blue')),
+		);
 		$expected = '<collection><shirt id="1" color="green" />';
 		$expected .= '<shirt id="2" color="blue" /></collection>';
 
@@ -687,6 +714,24 @@ class XmlTest extends CakeTestCase {
 		$this->assertEqual($expected, $result);
 	}
 /**
+ * ensure that normalize does not add _name_ elements that come from Set::map sometimes.
+ *
+ * @return void
+ */
+	function testNormalizeNotAdding_name_Element() {
+		$input = array(
+			'output' => array(
+				'Vouchers' => array(
+					array('Voucher' => array('id' => 1)),
+					array('Voucher' => array('id' => 2)),
+				),
+			)
+		);
+		$xml = new Xml($input, array('attributes' => false, 'format' => 'tags'));
+		$this->assertFalse(isset($xml->children[0]->children[0]->children[1]), 'Too many children %s');
+		$this->assertEqual($xml->children[0]->children[0]->children[0]->name, 'voucher');
+	}
+/**
  * testSimpleParsing method
  *
  * @access public
@@ -761,7 +806,7 @@ class XmlTest extends CakeTestCase {
 	}
 /**
  * test that empty values do not casefold collapse
- * 
+ *
  * @see http://code.cakephp.org/tickets/view/8
  * @return void
  **/
@@ -797,7 +842,7 @@ class XmlTest extends CakeTestCase {
 				<name>varchar(45)</name>
 			</User>
 		</method>';
-		
+
 		$xml =& new XML($emptyValue);
 		$expected = array(
 			'Method' => array(
@@ -1175,8 +1220,67 @@ class XmlTest extends CakeTestCase {
 				)
 			)
 		));
-
 		$this->assertEqual($result, $expected);
+
+		$text = '<?xml version="1.0" encoding="UTF-8"?>
+		<root>
+			<child id="1" other="1" />
+			<child id="2" other="1" />
+			<child id="3" other="1" />
+			<child id="4" other="1" />
+			<child id="5" other="1" />
+		</root>';
+		$xml = new Xml($text);
+		$result = $xml->toArray();
+		$expected = array(
+			'Root' => array(
+				'Child' => array(
+					array('id' => 1, 'other' => 1),
+					array('id' => 2, 'other' => 1),
+					array('id' => 3, 'other' => 1),
+					array('id' => 4, 'other' => 1),
+					array('id' => 5, 'other' => 1)
+				)
+			)
+		);
+		$this->assertEqual($result, $expected);
+
+		$text = '<main><first label="first type node 1" /><first label="first type node 2" /><second label="second type node" /></main>';
+		$xml =  new Xml($text);
+		$result = $xml->toArray();
+		$expected = array(
+		    'Main' => array(
+		        'First' => array(
+		            array('label' => 'first type node 1'),
+		            array('label' => 'first type node 2')
+		        ),
+		        'Second' => array('label'=>'second type node')
+		    )
+		);
+		$this->assertIdentical($result,$expected);
+
+		$text = '<main><first label="first type node 1" /><first label="first type node 2" /><second label="second type node" /><collection><fifth label="fifth type node"/><third label="third type node 1"/><third label="third type node 2"/><third label="third type node 3"/><fourth label="fourth type node"/></collection></main>';
+		$xml =  new Xml($text);
+		$result = $xml->toArray();
+		$expected = array(
+		    'Main' => array(
+		        'First' => array(
+		            array('label' => 'first type node 1'),
+		            array('label' => 'first type node 2')
+		        ),
+		        'Second' => array('label'=>'second type node'),
+				'Collection' => array(
+					'Fifth' => array('label' => 'fifth type node'),
+					'Third' => array(
+						array('label' => 'third type node 1'),
+						array('label' => 'third type node 2'),
+						array('label' => 'third type node 3'),
+					),
+					'Fourth' => array('label' => 'fourth type node'),
+				)
+		    )
+		);
+		$this->assertIdentical($result,$expected);
 	}
 /**
  * testAppend method
@@ -1266,5 +1370,215 @@ class XmlTest extends CakeTestCase {
 		$result = $result[0]->first();
 		$this->assertEqual($result->value, '012345');
 	}
+
+/**
+ * test that creating an xml object does not leak memory
+ *
+ * @return void
+ */
+	function testMemoryLeakInConstructor() {
+		if ($this->skipIf(!function_exists('memory_get_usage'), 'Cannot test memory leaks without memory_get_usage')) {
+			return;
+		}
+		$data = '<?xml version="1.0" encoding="UTF-8"?><content>TEST</content>';
+		$start = memory_get_usage();
+		for ($i = 0; $i <= 300; $i++) {
+			$test =& new XML($data);
+			$test->__destruct();
+			unset($test);
+		}
+		$end = memory_get_usage();
+		$this->assertWithinMargin($start, $end, 3600, 'Memory leaked %s');
+	}
+
+/**
+ * Test toArray with alternate inputs.
+ *
+ * @return void
+ */
+	function testToArrayAlternate() {
+		$sXml = 
+		'<t1>
+		 	<t2>A</t2>
+      		<t2><t3>AAA</t3>B</t2>
+	  		<t2>C</t2>
+		</t1>';
+		$xml = new Xml($sXml);
+		$result = $xml->toArray();
+		$expected = array(
+			'T1' => array(
+				'T2' => array(
+					'A',
+					array('t3' => 'AAA', 'value' => 'B'),
+					'C'
+			)
+		)
+		);
+		$this->assertIdentical($result, $expected);
+		$result = $xml->toArray(false);
+		$expected = array(
+			't1' => array(
+				't2' => array(
+					'A',
+					array('t3' => 'AAA', 'value' => 'B'),
+					'C'
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		
+		$sXml = 
+		'<t1>
+		 	<t2>A</t2>
+	  		<t2>B</t2>
+      		<t2>
+	         	<t3>CCC</t3>
+	      	</t2>
+		</t1>';
+		$xml = new Xml($sXml);
+		$result = $xml->toArray();
+		$expected = array(
+			'T1' => array(
+				'T2' => array(
+					'A',
+					'B',
+					array('t3' => 'CCC'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		$result = $xml->toArray(false);
+		$expected = array(
+			't1' => array(
+				't2' => array(
+					'A',
+					'B',
+					array('t3' => 'CCC'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		
+		$sXml = 
+		'<t1>
+		 <t2>A</t2>
+		 <t2></t2>
+		 <t2>C</t2>
+		</t1>';
+		$xml = new Xml($sXml);
+		$result = $xml->toArray();
+		$expected = array(
+			'T1' => array(
+				'T2' => array(
+					'A',
+					array(),
+					'C'
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+
+		$result = $xml->toArray(false);
+		$expected = array(
+			't1' => array(
+				't2' => array(
+					'A',
+					array(),
+					'C'
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		
+		$sXml = 
+		'<stuff>
+    <foo name="abc-16" profile-id="Default" />
+    <foo name="abc-17" profile-id="Default" >
+        <bar id="HelloWorld" />
+    </foo>
+    <foo name="abc-asdf" profile-id="Default" />
+    <foo name="cba-1A" profile-id="Default">
+        <bar id="Baz" />
+    </foo>
+    <foo name="cba-2A" profile-id="Default">
+        <bar id="Baz" />
+    </foo>
+    <foo name="qa" profile-id="Default" />
+</stuff>';
+		$xml = new Xml($sXml);
+		$result = $xml->toArray();
+		$expected = array(
+			'Stuff' => array(
+				'Foo' => array(
+					array('name' => 'abc-16', 'profile-id' => 'Default'),
+					array('name' => 'abc-17', 'profile-id' => 'Default', 
+						'Bar' => array('id' => 'HelloWorld')),
+					array('name' => 'abc-asdf', 'profile-id' => 'Default'),
+					array('name' => 'cba-1A', 'profile-id' => 'Default', 
+						'Bar' => array('id' => 'Baz')),
+					array('name' => 'cba-2A', 'profile-id' => 'Default', 
+						'Bar' => array('id' => 'Baz')),
+					array('name' => 'qa', 'profile-id' => 'Default'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		$result = $xml->toArray(false);
+		$expected = array(
+			'stuff' => array(
+				'foo' => array(
+					array('name' => 'abc-16', 'profile-id' => 'Default'),
+					array('name' => 'abc-17', 'profile-id' => 'Default', 
+						'bar' => array('id' => 'HelloWorld')),
+					array('name' => 'abc-asdf', 'profile-id' => 'Default'),
+					array('name' => 'cba-1A', 'profile-id' => 'Default', 
+						'bar' => array('id' => 'Baz')),
+					array('name' => 'cba-2A', 'profile-id' => 'Default', 
+						'bar' => array('id' => 'Baz')),
+					array('name' => 'qa', 'profile-id' => 'Default'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		
+		
+		$sXml = 
+		'<root>
+  <node name="first" />
+  <node name="second"><subnode name="first sub" /><subnode name="second sub" /></node>
+  <node name="third" />
+</root>';
+		$xml = new Xml($sXml);
+		$result = $xml->toArray();
+		$expected = array(
+			'Root' => array(
+				'Node' => array(
+					array('name' => 'first'),
+					array('name' => 'second', 
+						'Subnode' => array(
+							array('name' => 'first sub'), 
+							array('name' => 'second sub'))),
+					array('name' => 'third'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+		
+		$result = $xml->toArray(false);
+		$expected = array(
+			'root' => array(
+				'node' => array(
+					array('name' => 'first'),
+					array('name' => 'second', 
+						'subnode' => array(
+							array('name' => 'first sub'), 
+							array('name' => 'second sub'))),
+					array('name' => 'third'),
+				)
+			)
+		);
+		$this->assertIdentical($result, $expected);
+	}
+	
 }
 ?>

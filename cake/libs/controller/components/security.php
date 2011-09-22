@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) : Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.controller.components
  * @since         CakePHP(tm) v 0.10.8.2156
@@ -24,6 +23,7 @@
  * @lastmodified  $Date$
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+App::import('Core', 'String');
 /**
  * Short description for file.
  *
@@ -106,7 +106,6 @@ class SecurityComponent extends Object {
 	var $loginOptions = array('type' => '', 'prompt' => null);
 /**
  * An associative array of usernames/passwords used for HTTP-authenticated logins.
- * If using digest authentication, passwords should be MD5-hashed.
  *
  * @var array
  * @access public
@@ -327,7 +326,7 @@ class SecurityComponent extends Object {
 			$out[] = 'opaque="' . md5($options['realm']).'"';
 		}
 
-		return $auth . ' ' . join(',', $out);
+		return $auth . ' ' . implode(',', $out);
 	}
 /**
  * Parses an HTTP digest authentication response, and returns an array of the data, or null on failure.
@@ -343,7 +342,7 @@ class SecurityComponent extends Object {
 		$keys = array();
 		$match = array();
 		$req = array('nonce' => 1, 'nc' => 1, 'cnonce' => 1, 'qop' => 1, 'username' => 1, 'uri' => 1, 'response' => 1);
-		preg_match_all('@(\w+)=([\'"]?)([a-zA-Z0-9=./\_-]+)\2@', $digest, $match, PREG_SET_ORDER);
+		preg_match_all('/(\w+)=([\'"]?)([a-zA-Z0-9@=.\/_-]+)\2/', $digest, $match, PREG_SET_ORDER);
 
 		foreach ($match as $i) {
 			$keys[$i[1]] = $i[3];
@@ -381,8 +380,6 @@ class SecurityComponent extends Object {
  * @see SecurityComponent::$blackHoleCallback
  */
 	function blackHole(&$controller, $error = '') {
-		$this->Session->del('_Token');
-
 		if ($this->blackHoleCallback == null) {
 			$code = 404;
 			if ($error == 'login') {
@@ -545,7 +542,7 @@ class SecurityComponent extends Object {
 		}
 		$data = $controller->data;
 
-		if (!isset($data['_Token']) || !isset($data['_Token']['fields'])) {
+		if (!isset($data['_Token']) || !isset($data['_Token']['fields']) || !isset($data['_Token']['key'])) {
 			return false;
 		}
 		$token = $data['_Token']['key'];
@@ -556,6 +553,8 @@ class SecurityComponent extends Object {
 			if ($tokenData['expires'] < time() || $tokenData['key'] !== $token) {
 				return false;
 			}
+		} else {
+			return false;
 		}
 
 		$locked = null;
@@ -567,10 +566,11 @@ class SecurityComponent extends Object {
 		}
 		unset($check['_Token']);
 
+		$locked = explode('|', $locked);
+
 		$lockedFields = array();
 		$fields = Set::flatten($check);
 		$fieldList = array_keys($fields);
-		$locked = unserialize(str_rot13($locked));
 		$multi = array();
 
 		foreach ($fieldList as $i => $key) {
@@ -621,6 +621,10 @@ class SecurityComponent extends Object {
  */
 	function _generateToken(&$controller) {
 		if (isset($controller->params['requested']) && $controller->params['requested'] === 1) {
+			if ($this->Session->check('_Token')) {
+				$tokenData = unserialize($this->Session->read('_Token'));
+				$controller->params['_Token'] = $tokenData;
+			}
 			return false;
 		}
 		$authKey = Security::generateAuthKey();
@@ -651,7 +655,6 @@ class SecurityComponent extends Object {
 		}
 		$controller->params['_Token'] = $token;
 		$this->Session->write('_Token', serialize($token));
-
 		return true;
 	}
 /**

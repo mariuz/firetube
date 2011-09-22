@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.model.datasources.dbo
  * @since         CakePHP v 1.2.0.4041
@@ -704,7 +703,7 @@ class DboOracle extends DboSource {
 						break;
 					}
 				}
-				$out .= "\t" . join(",\n\t", $colList) . ";\n\n";
+				$out .= "\t" . implode(",\n\t", $colList) . ";\n\n";
 			}
 		}
 		return $out;
@@ -905,7 +904,7 @@ class DboOracle extends DboSource {
 
 		switch (strtolower($type)) {
 			case 'select':
-				return "SELECT {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$order} {$limit}";
+				return "SELECT {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order} {$limit}";
 			break;
 			case 'create':
 				return "INSERT INTO {$table} ({$fields}) VALUES ({$values})";
@@ -925,7 +924,7 @@ class DboOracle extends DboSource {
 			case 'schema':
 				foreach (array('columns', 'indexes') as $var) {
 					if (is_array(${$var})) {
-						${$var} = "\t" . join(",\n\t", array_filter(${$var}));
+						${$var} = "\t" . implode(",\n\t", array_filter(${$var}));
 					}
 				}
 				if (trim($indexes) != '') {
@@ -977,7 +976,7 @@ class DboOracle extends DboSource {
 					$fetch = array();
 					$ins = array_chunk($ins, 1000);
 					foreach ($ins as $i) {
-						$q = str_replace('{$__cakeID__$}', join(', ', $i), $query);
+						$q = str_replace('{$__cakeID__$}', implode(', ', $i), $query);
 						$q = str_replace('= (', 'IN (', $q);
 						$res = $this->fetchAll($q, $model->cacheQueries, $model->alias);
 						$fetch = array_merge($fetch, $res);
@@ -1021,7 +1020,7 @@ class DboOracle extends DboSource {
 					$fetch = array();
 					$ins = array_chunk($ins, 1000);
 					foreach ($ins as $i) {
-						$q = str_replace('{$__cakeID__$}', '(' .join(', ', $i) .')', $query);
+						$q = str_replace('{$__cakeID__$}', '(' .implode(', ', $i) .')', $query);
 						$q = str_replace('= (', 'IN (', $q);
 						$q = str_replace('  WHERE 1 = 1', '', $q);
 

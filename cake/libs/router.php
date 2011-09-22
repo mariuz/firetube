@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs
  * @since         CakePHP(tm) v 0.2.9
@@ -252,8 +251,9 @@ class Router extends Object {
 		if ($named === true || $named === false) {
 			$options = array_merge(array('default' => $named, 'reset' => true, 'greedy' => $named), $options);
 			$named = array();
+		} else {
+			$options = array_merge(array('default' => false, 'reset' => false, 'greedy' => true), $options);
 		}
-		$options = array_merge(array('default' => false, 'reset' => false, 'greedy' => true), $options);
 
 		if ($options['reset'] == true || $_this->named['rules'] === false) {
 			$_this->named['rules'] = array();
@@ -378,7 +378,7 @@ class Router extends Object {
 				$parsed[] = '/' . $element;
 			}
 		}
-		return array('#^' . join('', $parsed) . '[\/]*$#', $names);
+		return array('#^' . implode('', $parsed) . '[\/]*$#', $names);
 	}
 /**
  * Returns the list of prefixes used in connected routes
@@ -562,6 +562,7 @@ class Router extends Object {
 						if (strcasecmp($name, $match) === 0) {
 							$url = substr($url, 0, strpos($url, '.' . $name));
 							$ext = $match;
+							break;
 						}
 					}
 				}
@@ -580,10 +581,6 @@ class Router extends Object {
  * @access private
  */
 	function __connectDefaultRoutes() {
-		if ($this->__defaultsMapped) {
-			return;
-		}
-
 		if ($this->__admin) {
 			$params = array('prefix' => $this->__admin, $this->__admin => true);
 		}
@@ -883,11 +880,11 @@ class Router extends Object {
 				if ($_this->__admin && isset($url[$_this->__admin])) {
 					array_unshift($urlOut, $_this->__admin);
 				}
-				$output = join('/', $urlOut) . '/';
+				$output = implode('/', $urlOut) . '/';
 			}
 
 			if (!empty($args)) {
-				$args = join('/', $args);
+				$args = implode('/', $args);
 				if ($output{strlen($output) - 1} != '/') {
 					$args = '/'. $args;
 				}
@@ -1069,7 +1066,7 @@ class Router extends Object {
 				for ($i = 0; $i < $count; $i++) {
 					$named[] = $keys[$i] . $this->named['separator'] . $params['named'][$keys[$i]];
 				}
-				$params['named'] = join('/', $named);
+				$params['named'] = implode('/', $named);
 			}
 			$params['pass'] = str_replace('//', '/', $params['pass'] . '/' . $params['named']);
 		}
@@ -1183,9 +1180,11 @@ class Router extends Object {
 		return $out;
 	}
 /**
- * Normalizes a URL for purposes of comparison
+ * Normalizes a URL for purposes of comparison.  Will strip the base path off
+ * and replace any double /'s.  It will not unify the casing and underscoring
+ * of the input value.
  *
- * @param mixed $url URL to normalize
+ * @param mixed $url URL to normalize Either an array or a string url.
  * @return string Normalized URL
  * @access public
  */

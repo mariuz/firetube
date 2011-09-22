@@ -5,15 +5,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.view.helpers
  * @since         CakePHP(tm) v 0.10.0.1076
@@ -214,11 +213,11 @@ class JavascriptHelper extends AppHelper {
 		$options = $this->_blockOptions;
 		$this->_blockOptions = array();
 		$this->inBlock = false;
-		
+
 		if (empty($script)) {
 			return null;
 		}
-		
+
 		return $this->codeBlock($script, $options);
 	}
 /**
@@ -249,23 +248,26 @@ class JavascriptHelper extends AppHelper {
 				$url = JS_URL . $url;
 			}
 			if (strpos($url, '?') === false) {
-				if (strpos($url, '.js') === false) {
+				if (!preg_match('/.*\.(js|php)$/i', $url)) {
 					$url .= '.js';
 				}
 			}
-
-			$url = $this->webroot($url);
 			$timestampEnabled = (
 				(Configure::read('Asset.timestamp') === true && Configure::read() > 0) ||
 				Configure::read('Asset.timestamp') === 'force'
 			);
 
 			if (strpos($url, '?') === false && $timestampEnabled) {
-				$url .= '?' . @filemtime(WWW_ROOT . str_replace('/', DS, $url));
+				$url = $this->webroot($url) . '?' . @filemtime(WWW_ROOT . str_replace('/', DS, $url));
+			} else {
+				$url = $this->webroot($url);
 			}
-
+			
 			if (Configure::read('Asset.filter.js')) {
-				$url = str_replace(JS_URL, 'cjs/', $url);
+				$pos = strpos($url, JS_URL);
+				if ($pos !== false) {
+					$url = substr($url, 0, $pos) . 'cjs/' . substr($url, $pos + strlen(JS_URL));
+				}
 			}
 		}
 		$out = $this->output(sprintf($this->tags['javascriptlink'], $url));
@@ -579,7 +581,7 @@ class JavascriptHelper extends AppHelper {
  * - postfix - Appends the string to the returned data. Default is ''
  * - stringKeys - A list of array keys to be treated as a string.
  * - quoteKeys - If false treats $stringKeys as a list of keys **not** to be quoted. Default is true.
- * - q - The type of quote to use. Default is "'"
+ * - q - The type of quote to use. Default is '"'.  This option only affects the keys, not the values.
  *
  * @param array $data Data to be converted
  * @param array $options Set of options: block, prefix, postfix, stringKeys, quoteKeys, q
@@ -630,7 +632,10 @@ class JavascriptHelper extends AppHelper {
 
 			foreach ($data as $key => $val) {
 				if (is_array($val) || is_object($val)) {
-					$val = $this->object($val, array_merge($options, array('block' => false)));
+					$val = $this->object(
+						$val,
+						array_merge($options, array('block' => false, 'prefix' => '', 'postfix' => ''))
+					);
 				} else {
 					$quoteStrings = (
 						!count($options['stringKeys']) ||
@@ -646,9 +651,9 @@ class JavascriptHelper extends AppHelper {
 			}
 
 			if (!$numeric) {
-				$rt = '{' . join(',', $out) . '}';
+				$rt = '{' . implode(',', $out) . '}';
 			} else {
-				$rt = '[' . join(',', $out) . ']';
+				$rt = '[' . implode(',', $out) . ']';
 			}
 		}
 		$rt = $options['prefix'] . $rt . $options['postfix'];
@@ -675,7 +680,7 @@ class JavascriptHelper extends AppHelper {
 				$val = 'null';
 			break;
 			case (is_bool($val)):
-				$val = ife($val, 'true', 'false');
+				$val = !empty($val) ? 'true' : 'false';
 			break;
 			case (is_int($val)):
 				$val = $val;

@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.console.libs
  * @since         CakePHP(tm) v 1.2.0.5012
@@ -169,8 +168,8 @@ class ApiShell extends Shell {
 			foreach ($commands as $cmd) {
 				$this->out("{$cmd}\n\n");
 			}
-		} elseif (isset($commands[low($this->args[1])])) {
-			$this->out($commands[low($this->args[1])] . "\n\n");
+		} elseif (isset($commands[strtolower($this->args[1])])) {
+			$this->out($commands[strtolower($this->args[1])] . "\n\n");
 		} else {
 			$this->out("Command '" . $this->args[1] . "' not found");
 		}

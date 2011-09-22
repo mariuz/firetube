@@ -8,13 +8,12 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
  * @package       cake
  * @subpackage    cake.tests.cases.libs.view.helpers
@@ -62,9 +61,8 @@ class SessionHelperTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function setUp() {
+	function startTest() {
 		$this->Session = new SessionHelper();
-		$this->Session->__start();
 
 		$_SESSION = array(
 			'test' => 'info',
@@ -102,6 +100,15 @@ class SessionHelperTest extends CakeTestCase {
 	function tearDown() {
 		$_SESSION = array();
 		unset($this->Session);
+	}
+/**
+ * test construction and initial property settings
+ *
+ * @return void
+ **/
+	function testConstruct() {
+		$this->assertFalse(empty($this->Session->sessionTime));
+		$this->assertFalse(empty($this->Session->security));
 	}
 /**
  * testRead method
@@ -216,7 +223,7 @@ class SessionHelperTest extends CakeTestCase {
 		ob_clean();
 
 		$this->assertPattern("/Missing Layout/", $result);
-		$this->assertPattern("/layouts\/does_not_exist.ctp/", $result);
+		$this->assertPattern("/layouts(\\\|\/)does_not_exist.ctp/", $result);
 	}
 /**
  * testID method

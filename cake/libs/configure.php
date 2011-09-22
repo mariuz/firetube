@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs
  * @since         CakePHP(tm) v 1.0.0.2363
@@ -111,13 +110,6 @@ class Configure extends Object {
  */
 	var $debug = null;
 /**
- * Determines if $__objects cache should be written.
- *
- * @var boolean
- * @access private
- */
-	var $__cache = false;
-/**
  * Holds and key => value array of objects' types.
  *
  * @var array
@@ -204,7 +196,7 @@ class Configure extends Object {
 			}
 			if ($cache === true && !empty($objects)) {
 				$_this->__objects[$name] = $objects;
-				$_this->__cache = true;
+				$_this->__resetCache(true);
 			} else {
 				return $objects;
 			}
@@ -254,7 +246,7 @@ class Configure extends Object {
  *     'key1' => 'value of the Configure::One[key1]',
  *     'key2' => 'value of the Configure::One[key2]'
  * );
- * 
+ *
  * Configure::write(array(
  *     'One.key1' => 'value of the Configure::One[key1]',
  *     'One.key2' => 'value of the Configure::One[key2]'
@@ -373,7 +365,7 @@ class Configure extends Object {
 		$_this =& Configure::getInstance();
 		$name = $_this->__configVarNames($var);
 
-		if (count($name) > 1) {
+		if (isset($name[1])) {
 			unset($_this->{$name[0]}[$name[1]]);
 		} else {
 			unset($_this->{$name[0]});
@@ -459,20 +451,7 @@ class Configure extends Object {
 		$content = '';
 
 		foreach ($data as $key => $value) {
-			$content .= "\$config['$type']['$key']";
-
-			if (is_array($value)) {
-				$content .= " = array(";
-
-				foreach ($value as $key1 => $value2) {
-					$value2 = addslashes($value2);
-					$content .= "'$key1' => '$value2', ";
-				}
-				$content .= ");\n";
-			} else {
-				$value = addslashes($value);
-				$content .= " = '$value';\n";
-			}
+			$content .= "\$config['$type']['$key'] = " . var_export($value, true) . ";\n";
 		}
 		if (is_null($type)) {
 			$write = false;
@@ -652,10 +631,6 @@ class Configure extends Object {
 				trigger_error(sprintf(__("Can't find application core file. Please create %score.php, and make sure it is readable by PHP.", true), CONFIGS), E_USER_ERROR);
 			}
 
-			if (!include(CONFIGS . 'bootstrap.php')) {
-				trigger_error(sprintf(__("Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP.", true), CONFIGS), E_USER_ERROR);
-			}
-
 			if (Configure::read('Cache.disable') !== true) {
 				$cache = Cache::config('default');
 
@@ -692,6 +667,11 @@ class Configure extends Object {
 				}
 				Cache::config('default');
 			}
+
+			if (!include(CONFIGS . 'bootstrap.php')) {
+				trigger_error(sprintf(__("Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP.", true), CONFIGS), E_USER_ERROR);
+			}
+
 			Configure::buildPaths(compact(
 				'modelPaths', 'viewPaths', 'controllerPaths', 'helperPaths', 'componentPaths',
 				'behaviorPaths', 'pluginPaths', 'vendorPaths', 'localePaths', 'shellPaths'
@@ -699,12 +679,26 @@ class Configure extends Object {
 		}
 	}
 /**
+ * Determines if $__objects cache should be reset.
+ *
+ * @param boolean $reset 
+ * @return boolean
+ * @access private
+ */	
+	function __resetCache($reset = null) {
+		static $cache = array();
+		if (!$cache && $reset === true) {
+			$cache = true;	
+		}
+		return $cache;
+	}
+/**
  * Caches the object map when the instance of the Configure class is destroyed
  *
  * @access public
  */
 	function __destruct() {
-		if ($this->__cache) {
+		if ($this->__resetCache() === true) {
 			Cache::write('object_map', array_filter($this->__objects), '_cake_core_');
 		}
 	}
@@ -732,13 +726,6 @@ class App extends Object {
  * @access public
  */
 	var $return = false;
-/**
- * Determines if $__maps and $__paths cache should be written.
- *
- * @var boolean
- * @access private
- */
-	var $__cache = false;
 /**
  * Holds key/value pairs of $type => file path.
  *
@@ -848,7 +835,7 @@ class App extends Object {
 					return true;
 				} else {
 					$_this->__remove($name . $ext['class'], $type, $plugin);
-					$_this->__cache = true;
+					$_this->__resetCache(true);
 				}
 			}
 			if (!empty($search)) {
@@ -880,7 +867,7 @@ class App extends Object {
 			}
 
 			if ($directory !== null) {
-				$_this->__cache = true;
+				$_this->__resetCache(true);
 				$_this->__map($directory . $file, $name . $ext['class'], $type, $plugin);
 				$_this->__overload($type, $name . $ext['class']);
 
@@ -1175,6 +1162,20 @@ class App extends Object {
 		}
 	}
 /**
+ * Determines if $__maps and $__paths cache should be reset.
+ *
+ * @param boolean $reset 
+ * @return boolean
+ * @access private
+ */	
+	function __resetCache($reset = null) {
+		static $cache = array();
+		if (!$cache && $reset === true) {
+			$cache = true;	
+		}
+		return $cache;
+	}
+/**
  * Object destructor.
  *
  * Writes cache file if changes have been made to the $__map or $__paths
@@ -1183,7 +1184,7 @@ class App extends Object {
  * @access private
  */
 	function __destruct() {
-		if ($this->__cache) {
+		if ($this->__resetCache() === true) {
 			$core = Configure::corePaths('cake');
 			unset($this->__paths[rtrim($core[0], DS)]);
 			Cache::write('dir_map', array_filter($this->__paths), '_cake_core_');

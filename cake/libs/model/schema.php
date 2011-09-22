@@ -5,15 +5,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.model
  * @since         CakePHP(tm) v 1.2.0.5550
@@ -168,7 +167,7 @@ class CakeSchema extends Object {
  * Reads database and creates schema tables
  *
  * Options
- * 
+ *
  * - 'connection' - the db connection to use
  * - 'name' - name of the schema
  * - 'models' - a list of models to use, or false to ignore models
@@ -334,19 +333,19 @@ class CakeSchema extends Object {
 							}
 							$col = "\t\t'{$field}' => array('type' => '" . $value['type'] . "', ";
 							unset($value['type']);
-							$col .= join(', ',  $this->__values($value));
+							$col .= implode(', ',  $this->__values($value));
 						} else {
 							$col = "\t\t'indexes' => array(";
 							$props = array();
 							foreach ((array)$value as $key => $index) {
-								$props[] = "'{$key}' => array(" . join(', ',  $this->__values($index)) . ")";
+								$props[] = "'{$key}' => array(" . implode(', ',  $this->__values($index)) . ")";
 							}
-							$col .= join(', ', $props);
+							$col .= implode(', ', $props);
 						}
 						$col .= ")";
 						$cols[] = $col;
 					}
-					$out .= join(",\n", $cols);
+					$out .= implode(",\n", $cols);
 				}
 				$out .= "\n\t);\n";
 			}
@@ -373,7 +372,7 @@ class CakeSchema extends Object {
  */
 	function compare($old, $new = null) {
 		if (empty($new)) {
-			$new = $this;
+			$new =& $this;
 		}
 		if (is_array($new)) {
 			if (isset($new['tables'])) {
@@ -393,7 +392,7 @@ class CakeSchema extends Object {
 		$tables = array();
 		foreach ($new as $table => $fields) {
 			if ($table == 'missing') {
-				break;
+				continue;
 			}
 			if (!array_key_exists($table, $old)) {
 				$tables[$table]['add'] = $fields;
@@ -407,6 +406,7 @@ class CakeSchema extends Object {
 					$tables[$table]['drop'] = $diff;
 				}
 			}
+
 			foreach ($fields as $field => $value) {
 				if (isset($old[$table][$field])) {
 					$diff = array_diff_assoc($value, $old[$table][$field]);
@@ -428,8 +428,15 @@ class CakeSchema extends Object {
 			if (isset($old[$table]['indexes']) && isset($new[$table]['indexes'])) {
 				$diff = $this->_compareIndexes($new[$table]['indexes'], $old[$table]['indexes']);
 				if ($diff) {
-					$tables[$table]['drop']['indexes'] = $diff['drop'];
-					$tables[$table]['add']['indexes'] = $diff['add'];
+					if (!isset($tables[$table])) {
+						$tables[$table] = array();
+					}
+					if (isset($diff['drop'])) {
+						$tables[$table]['drop']['indexes'] = $diff['drop'];
+					}
+					if ($diff && isset($diff['add'])) {
+						$tables[$table]['add']['indexes'] = $diff['add'];
+					}
 				}
 			}
 		}
@@ -447,7 +454,7 @@ class CakeSchema extends Object {
 		if (is_array($values)) {
 			foreach ($values as $key => $val) {
 				if (is_array($val)) {
-					$vals[] = "'{$key}' => array('" . join("', '",  $val) . "')";
+					$vals[] = "'{$key}' => array('" . implode("', '",  $val) . "')";
 				} else if (!is_numeric($key)) {
 					$val = var_export($val, true);
 					$vals[] = "'{$key}' => {$val}";

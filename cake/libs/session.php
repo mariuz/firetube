@@ -10,15 +10,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs
  * @since         CakePHP(tm) v .0.10.0.1222
@@ -118,6 +117,13 @@ class CakeSession extends Object {
  */
 	var $id = null;
 /**
+ * Hostname
+ *
+ * @var string
+ * @access public
+ */
+	var $host = null;
+/**
  * Constructor.
  *
  * @param string $base The base path for the Session
@@ -151,6 +157,8 @@ class CakeSession extends Object {
 			if (strpos($this->host, ':') !== false) {
 				$this->host = substr($this->host, 0, strpos($this->host, ':'));
 			}
+		}
+		if (isset($_SESSION) || $start === true) {
 			if (!class_exists('Security')) {
 				App::import('Core', 'Security');
 			}
@@ -162,16 +170,19 @@ class CakeSession extends Object {
 /**
  * Starts the Session.
  *
- * @param string $name Variable name to check for
- * @return boolean True if variable is there
+ * @return boolean True if session was started
  * @access public
  */
 	function start() {
+		if ($this->started()) {
+			return true;
+		}
 		if (function_exists('session_write_close')) {
 			session_write_close();
 		}
 		$this->__initSession();
-		return $this->__startSession();
+		$this->__startSession();
+		return $this->started();
 	}
 /**
  * Determine if Session has been started.
@@ -180,7 +191,7 @@ class CakeSession extends Object {
  * @return boolean True if session has been started.
  */
 	function started() {
-		if (isset($_SESSION)) {
+		if (isset($_SESSION) && session_id()) {
 			return true;
 		}
 		return false;
@@ -212,7 +223,7 @@ class CakeSession extends Object {
 			$this->id = $id;
 			session_id($this->id);
 		}
-		if (isset($_SESSION)) {
+		if ($this->started()) {
 			return session_id();
 		} else {
 			return $this->id;
@@ -474,12 +485,13 @@ class CakeSession extends Object {
 						ini_set('session.auto_start', 0);
 					}
 				}
-				session_set_save_handler(array('CakeSession','__open'),
-													array('CakeSession', '__close'),
-													array('CakeSession', '__read'),
-													array('CakeSession', '__write'),
-													array('CakeSession', '__destroy'),
-													array('CakeSession', '__gc'));
+				session_set_save_handler(
+					array('CakeSession','__open'),
+					array('CakeSession', '__close'),
+					array('CakeSession', '__read'),
+					array('CakeSession', '__write'),
+					array('CakeSession', '__destroy'),
+					array('CakeSession', '__gc'));
 			break;
 			case 'php':
 				if (empty($_SESSION)) {
@@ -506,20 +518,19 @@ class CakeSession extends Object {
 						ini_set('session.cookie_path', $this->path);
 					}
 				}
-				session_set_save_handler(array('CakeSession','__open'),
-													array('CakeSession', '__close'),
-													array('Cache', 'read'),
-													array('Cache', 'write'),
-													array('Cache', 'delete'),
-													array('Cache', 'gc'));
+				session_set_save_handler(
+					array('CakeSession','__open'),
+					array('CakeSession', '__close'),
+					array('Cache', 'read'),
+					array('Cache', 'write'),
+					array('Cache', 'delete'),
+					array('Cache', 'gc'));
 			break;
 			default:
-				if (empty($_SESSION)) {
-					$config = CONFIGS . Configure::read('Session.save') . '.php';
+				$config = CONFIGS . Configure::read('Session.save') . '.php';
 
-					if (is_file($config)) {
-						require_once ($config);
-					}
+				if (is_file($config)) {
+					require($config);
 				}
 			break;
 		}
@@ -590,15 +601,15 @@ class CakeSession extends Object {
 	function __regenerateId() {
 		$oldSessionId = session_id();
 		if ($oldSessionId) {
-			$sessionpath = session_save_path();
-			if (empty($sessionpath)) {
-				$sessionpath = "/tmp";
-			}
-			if (session_id() != "" || isset($_COOKIE[session_name()])) {
+			if (session_id() != ''|| isset($_COOKIE[session_name()])) {
 				setcookie(Configure::read('Session.cookie'), '', time() - 42000, $this->path);
 			}
 			session_regenerate_id(true);
 			if (PHP_VERSION < 5.1) {
+				$sessionPath = session_save_path();
+				if (empty($sessionPath)) {
+					$sessionPath = '/tmp';
+				}
 				$newSessid = session_id();
 
 				if (function_exists('session_write_close')) {
@@ -608,7 +619,7 @@ class CakeSession extends Object {
 				session_id($oldSessionId);
 				session_start();
 				session_destroy();
-				$file = $sessionpath . DS . "sess_$oldSessionId";
+				$file = $sessionPath . DS . 'sess_' . $oldSessionId;
 				@unlink($file);
 				$this->__initSession();
 				session_id($newSessid);
@@ -774,6 +785,6 @@ class CakeSession extends Object {
 		$table = $db->fullTableName(Configure::read('Session.table'));
 		$db->execute("DELETE FROM " . $db->name($table) . " WHERE " . $db->name($table.'.expires') . " < ". $db->value(time()));
 		return true;
-	 }
+	}
 }
 ?>

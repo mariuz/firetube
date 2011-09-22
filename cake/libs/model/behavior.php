@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.model
  * @since         CakePHP(tm) v 1.2.0.0
@@ -286,6 +285,9 @@ class BehaviorCollection extends Object {
 					$this->{$name} =& new $class;
 				}
 				ClassRegistry::addObject($class, $this->{$name});
+				if (!empty($plugin)) {
+					ClassRegistry::addObject($plugin.'.'.$class, $this->{$name});
+				}
 			}
 		} elseif (isset($this->{$name}->settings) && isset($this->{$name}->settings[$this->modelName])) {
 			if ($config !== null && $config !== false) {

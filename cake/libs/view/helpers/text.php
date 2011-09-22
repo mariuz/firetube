@@ -7,15 +7,14 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.cake.libs.view.helpers
  * @since         CakePHP(tm) v 0.10.0.1076
@@ -104,18 +103,12 @@ class TextHelper extends AppHelper {
  * @access public
  */
 	function autoLinkUrls($text, $htmlOptions = array()) {
-		$options = 'array(';
-		foreach ($htmlOptions as $option => $value) {
-				$value = var_export($value, true);
-				$options .= "'$option' => $value, ";
-		}
-		$options .= ')';
-
-		$text = preg_replace_callback('#(?<!href="|">)((?:http|https|ftp|nntp)://[^ <]+)#i', create_function('$matches',
+		$options = var_export($htmlOptions, true);
+		$text = preg_replace_callback('#(?<!href="|">)((?:https?|ftp|nntp)://[^\s<>()]+)#i', create_function('$matches',
 			'$Html = new HtmlHelper(); $Html->tags = $Html->loadConfig(); return $Html->link($matches[0], $matches[0],' . $options . ');'), $text);
 
 		return preg_replace_callback('#(?<!href="|">)(?<!http://|https://|ftp://|nntp://)(www\.[^\n\%\ <]+[^<\n\%\,\.\ <])(?<!\))#i',
-			create_function('$matches', '$Html = new HtmlHelper(); $Html->tags = $Html->loadConfig(); return $Html->link($matches[0], "http://" . strtolower($matches[0]),' . $options . ');'), $text);
+			create_function('$matches', '$Html = new HtmlHelper(); $Html->tags = $Html->loadConfig(); return $Html->link($matches[0], "http://" . $matches[0],' . $options . ');'), $text);
 	}
 /**
  * Adds email links (<a href="mailto:....) to a given text.
@@ -132,8 +125,9 @@ class TextHelper extends AppHelper {
 			$options .= "'$option' => '$value', ";
 		}
 		$options .= ')';
+		$atom = '[a-z0-9!#$%&\'*+\/=?^_`{|}~-]';
 
-		return preg_replace_callback('#([_A-Za-z0-9+-]+(?:\.[_A-Za-z0-9+-]+)*@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*)#',
+		return preg_replace_callback('/(' . $atom . '+(?:\.' . $atom . '+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)+)/i',
 						create_function('$matches', '$Html = new HtmlHelper(); $Html->tags = $Html->loadConfig(); return $Html->link($matches[0], "mailto:" . $matches[0],' . $options . ');'), $text);
 	}
 /**
@@ -168,7 +162,7 @@ class TextHelper extends AppHelper {
 			if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
 				return $text;
 			}
-			$totalLength = mb_strlen($ending);
+			$totalLength = mb_strlen(strip_tags($ending));
 			$openTags = array();
 			$truncate = '';
 			preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
@@ -210,7 +204,6 @@ class TextHelper extends AppHelper {
 					break;
 				}
 			}
-
 		} else {
 			if (mb_strlen($text) <= $length) {
 				return $text;
@@ -309,16 +302,17 @@ class TextHelper extends AppHelper {
  * @access public
  */
 	function toList($list, $and = 'and') {
-		$r = '';
-		$c = count($list) - 1;
+		$return = '';
+		$count = count($list) - 1;
+	    $counter = 0;
 		foreach ($list as $i => $item) {
-			$r .= $item;
-			if ($c > 0 && $i < $c)
-			{
-				$r .= ($i < $c - 1 ? ', ' : " {$and} ");
+			$return .= $item;
+			if ($count > 0 && $counter < $count) {
+				$return .= ($counter < $count - 1 ? ', ' : " {$and} ");
 			}
+		    $counter++;
 		}
-		return $r;
+		return $return;
 	}
 /**
  * Text-to-html parser, similar to Textile or RedCloth, only with a little different syntax.

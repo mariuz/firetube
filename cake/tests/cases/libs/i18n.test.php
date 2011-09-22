@@ -8,13 +8,12 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
  * @package       cake
  * @subpackage    cake.tests.cases.libs
@@ -43,10 +42,10 @@ class I18nTest extends CakeTestCase {
 		Configure::write('__objects', array());
 
 		$this->_localePaths = Configure::read('localePaths');
-		Configure::write('localePaths', array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'locale'));
+		Configure::write('localePaths', array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'locale' . DS));
 
 		$this->_pluginPaths = Configure::read('pluginPaths');
-		Configure::write('pluginPaths', array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'plugins'));
+		Configure::write('pluginPaths', array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'plugins' . DS));
 
 	}
 /**
@@ -59,7 +58,56 @@ class I18nTest extends CakeTestCase {
 		Configure::write('localePaths', $this->_localePaths);
 		Configure::write('pluginPaths', $this->_pluginPaths);
 		Configure::write('__objects', $this->_objects);
+	}
 
+	function testTranslationCaching() {
+		Configure::write('Config.language', 'cache_test_po');
+		$i18n =& i18n::getInstance();
+		
+		// reset cache & i18n
+		$i18n->__destruct();
+		Cache::clear(false, '_cake_core_');
+		$lang = $i18n->l10n->locale;
+
+		Cache::config('_cake_core_', Cache::config('default'));
+
+		// make some calls to translate using different domains
+		$this->assertEqual(i18n::translate('dom1.foo', false, 'dom1'), 'Dom 1 Foo');
+		$this->assertEqual(i18n::translate('dom1.bar', false, 'dom1'), 'Dom 1 Bar');
+
+		$this->assertEqual($i18n->__cache[0]['key'], 'dom1_' . $lang);
+		$this->assertEqual($i18n->__cache[0]['domain'], 'dom1');
+		$this->assertEqual($i18n->__domains['LC_MESSAGES']['cache_test_po']['dom1']['dom1.foo'], 'Dom 1 Foo');
+
+		// destruct -> writes to cache
+		$i18n->__destruct();
+
+		// now only dom1 should be in cache
+		$cachedDom1 = Cache::read('dom1_' . $lang, '_cake_core_');
+		$this->assertEqual($cachedDom1['dom1.foo'], 'Dom 1 Foo');
+		$this->assertEqual($cachedDom1['dom1.bar'], 'Dom 1 Bar');
+		// dom2 not in cache
+		$this->assertFalse(Cache::read('dom2_' . $lang, '_cake_core_'));
+
+		// translate a item of dom2 (adds dom2 to cache)
+		$this->assertEqual(i18n::translate('dom2.foo', false, 'dom2'), 'Dom 2 Foo');
+
+		// modify cache entry to verify that dom1 entry is now read from cache 
+		$cachedDom1['dom1.foo'] = 'FOO';
+		Cache::write('dom1_' . $lang, $cachedDom1, '_cake_core_');
+		$this->assertEqual(i18n::translate('dom1.foo', false, 'dom1'), 'FOO');
+
+		// verify that only dom2 will be cached now
+		$this->assertEqual($i18n->__cache[0]['key'], 'dom2_' . $lang);
+		$this->assertEqual(count($i18n->__cache), 1);
+
+		// write to cache
+		$i18n->__destruct();
+
+		// verify caching through manual read from cache
+		$cachedDom2 = Cache::read('dom2_' . $lang, '_cake_core_');
+		$this->assertEqual($cachedDom2['dom2.foo'], 'Dom 2 Foo');
+		$this->assertEqual($cachedDom2['dom2.bar'], 'Dom 2 Bar');
 	}
 /**
  * testDefaultStrings method
@@ -2557,7 +2605,7 @@ class I18nTest extends CakeTestCase {
  * @access private
  * @return void
  */
-	function __domainCategorySingular($domain = 'test_plugin', $category = LC_MONETARY) {
+	function __domainCategorySingular($domain = 'test_plugin', $category = 3) {
 		$singular = __dc($domain, 'Plural Rule 1', $category, true);
 		return $singular;
 	}
@@ -2567,7 +2615,7 @@ class I18nTest extends CakeTestCase {
  * @access private
  * @return void
  */
-	function __domainCategoryPlural($domain = 'test_plugin', $category = LC_MONETARY) {
+	function __domainCategoryPlural($domain = 'test_plugin', $category = 3) {
 		$plurals = array();
 		for ($number = 0; $number <= 25; $number++) {
 			$plurals[] =  sprintf(__dcn($domain, '%d = 1', '%d = 0 or > 1', (float)$number, $category, true), (float)$number);
@@ -2603,7 +2651,7 @@ class I18nTest extends CakeTestCase {
  * @access private
  * @return void
  */
-	function __category($category = LC_MONETARY) {
+	function __category($category = 3) {
 		$singular = __c('Plural Rule 1', $category, true);
 		return $singular;
 	}
