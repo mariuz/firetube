@@ -1,13 +1,8 @@
-connect "/var/lib/firebird/2.1/data/firetube.fdb";
-/********************* ROLES **********************/
-
-/********************* UDFS ***********************/
+connect "/var/lib/firebird/2.5/data/firetube.fdb";
 
 CREATE GENERATOR GEN_POSTS_ID;
 commit;
-/******************** DOMAINS *********************/
 
-/******************* PROCEDURES ******************/
 
 /******************** TABLES **********************/
 
@@ -17,11 +12,11 @@ CREATE TABLE FIREBIRD_SERVERS
  SERVER_NAME Varchar(512) NOT NULL
 );
 commit;
-CREATE TABLE GLOBAL_MOVIES_ID
+CREATE TABLE MOVIES_IDS
 (
- GLOBAL_ID integer NOT NULL,
+ MOVIE_ID integer NOT NULL,
  LOCAL_ID integer NOT NULL,
- PRIMARY KEY (ID)
+ PRIMARY KEY (MOVIE_ID)
 );				
 commit;
 CREATE TABLE POSTS
@@ -34,9 +29,6 @@ CREATE TABLE POSTS
   PRIMARY KEY (ID)
 );
 commit;
-/********************* VIEWS **********************/
-
-/******************* EXCEPTIONS *******************/
 
 /******************** TRIGGERS ********************/
 
@@ -60,5 +52,9 @@ INSERT INTO "POSTS" ("TITLE","BODY","MODIFIED","CREATED") VALUES ('Foo bazz bar'
 
 INSERT INTO "POSTS" ("TITLE","BODY","MODIFIED","CREATED") VALUES (' bazz bar Foo','test blog2 ','now','now');
 commit;
+
+
+
+
 
 
